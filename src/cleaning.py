@@ -13,6 +13,9 @@ def getPandasNumeric(df):
     df['Start_Time'] = pd.to_datetime(df['Start_Time'])
     df['End_Time'] = pd.to_datetime(df['End_Time'])
     df['Total_Time'] = df["End_Time"] - df['Start_Time']
+    #evaluate total time just on number of minutes
+    df['Total_Time'] = df['Total_Time'].apply(lambda x: (x.total_seconds()//60))
+    
 
     #dropped because they are strings, redundant, or catagorical with no easy way to turn numeric
     dropCols = ['TMC','End_Time','End_Lat','End_Lng','Number','Street','City',
@@ -35,7 +38,21 @@ def getPandasNumeric(df):
     df = df.replace(replaceDict)
 
     df[df.select_dtypes(include='bool').columns] = df.select_dtypes(include='bool').astype('int64')
+    df['Day_Of_Week'] = df['Start_Time'].dt.dayofweek
+    
+    #add up all the minutes of the day
+    df['Time_of_Day'] = df['Start_Time'].dt.hour*60 + df['Start_Time'].dt.minute
+    #now, transform time of day to reflect periodic nature (11:59pm is right before 12am)
+    #period of cos((2π/1440)*x) is 1440 == num minutes in a day
+    df['Time_of_Day'] = df['Time_of_Day'].apply(lambda x : np.cos(((2*np.pi)/1440)*x))
+    
+    #transform days of week in similar manner
+    df['Day_Of_Week'] = df['Day_Of_Week'].apply(lambda x : np.cos(((2*np.pi)/7)*x))
+    
+    #df['Total_Time']
+    
+    df = df.drop('Start_Time',axis=1)
+    
+    
     print("After dropping NaN, we have {} % of data left".format(100*(len(df)/originalSize)))
     return df
-
-

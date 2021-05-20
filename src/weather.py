@@ -17,7 +17,8 @@ def getWeather(lat=32.8800806,lng=-117.237558):
 #api.openweathermap.org/data/2.5/weather?lat=33.568483&lon=-117.731516&appid=d078ff41af2f9943ddea5b49d24e6c27
     url = 'http://api.openweathermap.org/data/2.5/weather'
     with open('../data/key.pkl','rb') as fi:
-        API_KEY = load(fi)['API_KEY']
+        API_KEY = load(fi)['key']
+        print(API_KEY)
     params = {'lat' : lat,
               'lon' : lng,
               'appid' : API_KEY}

@@ -3,6 +3,18 @@ use case
 data = pd.read_csv("../input/us-accidents/US_Accidents_Dec20_Updated.csv")
 data = data.dropna()
 find_best_reg(clean_data(data)[0])
+
+view hist and heatmap
+fig = plt.figure(figsize = (25,30))
+ax = fig.gca()
+clean_data(data)[0].hist(ax  =ax,bins = 50)
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+plt.figure(figsize=(12,5))
+heatmap = sns.heatmap(clean_data(data)[0].corr(), cmap="RdYlGn", cbar_kws = dict(use_gridspec=False, location="top", label='Correlation'), yticklabels=3, xticklabels=6, annot=False, linewidths=2)
+plt.xticks(rotation=0) 
+plt.show()
 '''
 import pandas as pd
 from sklearn.model_selection import cross_validate as cv

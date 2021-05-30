@@ -1,6 +1,7 @@
 import requests as req
 from pickle import load
 import numpy as np
+import pandas as pd
 import json
 from datetime import datetime
 def getWeather(lat=32.8800806,lng=-117.237558):
@@ -19,15 +20,14 @@ def getWeather(lat=32.8800806,lng=-117.237558):
         raise ValueError
 
     url = 'http://api.openweathermap.org/data/2.5/weather'
-    with open('../data/key.pkl','rb') as fi:
-        API_KEY = load(fi)['key']
+    with open('../data/key.pkl','rb') as fi: API_KEY = load(fi)['key']
     params = {'lat' : lat,
               'lon' : lng,
               'appid' : API_KEY,
               'units' : 'imperial'}
     r = req.get(url=url,params=params)
     return r.json()
-def generateExample(weatherDict,lat=None,lng=None):
+def generateExample(lat=None,lng=None,weatherDict=None):
     """Parse and transform weather dictionary from getWeather
     and use the information to create an example for inference
     :param weatherDict : dictionary with raw json
@@ -36,8 +36,10 @@ def generateExample(weatherDict,lat=None,lng=None):
     :return: JSON with relevant weather data
     :rtype: JSON object
     """
-    if not isinstance(weatherDict,dict):
+    if not isinstance(weatherDict,dict) and not weatherDict==None:
         raise TypeError
+    if weatherDict==None:
+        weatherDict = getWeather(lat,lng)
     #lat,lng in dict does not agree with coordinate in arg at all
     if not (lat==None or lng==None):
         if (np.abs(lat-weatherDict['coord']['lat']) > .1) or (np.abs(lng-weatherDict['coord']['lon']) > .1):
@@ -49,10 +51,9 @@ def generateExample(weatherDict,lat=None,lng=None):
             lng = weatherDict['coord']['lon']
 
     #desired:
-    #Index(['Start_Lat', 'Start_Lng', 'Temperature(F)', 'Wind_Chill(F)',
-    #   'Humidity(%)', 'Pressure(in)', 'Wind_Speed(mph)', 'Precipitation(in)',
-    #   'Civil_Twilight', 'Total_Time', 'Day_Of_Week', 'Time_of_Day','Visibility(mi)'],
-    #  dtype='object')
+    idx = list(['Start_Lat', 'Start_Lng', 'Temperature(F)', 'Wind_Chill(F)', 'Humidity(%)', 'Pressure(in)', 'Visibility(mi)','Wind_Direction','Wind_Speed(mph)','Precipitation(in)', 'Civil_Twilight', 'Day_Of_Week', 'Time_of_Day'])
+
+
     
     #given:
     #{'coord': {'lon': -117.2376, 'lat': 32.8801}, 
@@ -70,11 +71,10 @@ def generateExample(weatherDict,lat=None,lng=None):
 
 
     #provided:
-    print(weatherDict)
     ret = {'Start_Lat':lat,'Start_Lng':lng, 'Temperature(F)':weatherDict['main']['temp'],
-            'Humidity':weatherDict['main']['humidity']}
+            'Humidity(%)':weatherDict['main']['humidity']}
     #now convert pressure hPa -> psi
-    ret['Pressure(in)'] = weatherDict['main']['pressure']/(689500)
+    ret['Pressure(in)'] = weatherDict['main']['pressure']*.02953
 
     ret['Wind_Speed(mph)'] = weatherDict['wind']['speed']
 
@@ -103,7 +103,6 @@ def generateExample(weatherDict,lat=None,lng=None):
 
     #now windspeed
 
-    return ret
+    return pd.Series(ret,index=idx)
 
 
-print(generateExample(getWeather(),lat=32.8800806,lng=-117.237558))

@@ -74,8 +74,10 @@ def orderRoutes(routeJSON, model):
     :param routeJSON : raw json from googlemaps
     :param model : sklearn model for inference
     :raises TypeError: when non dictionary input
-    :return: value pertaining to time rating
-    :rtype: float
+    :return: values pertaining to time rating
+            in the order that the routes were ordered
+            inside the routeJSON
+    :rtype: list of floats
     """
     if not isinstance(routeJSON,dict):
         raise TypeError

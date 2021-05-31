@@ -88,7 +88,6 @@ def orderRoutes(routeJSON, model):
 
 
 
-print('model loaded')
 
 model = None
 with open('../data/trainedModelNationwide.pkl','rb') as fi:

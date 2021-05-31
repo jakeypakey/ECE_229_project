@@ -3,6 +3,8 @@
 Make sure you have the necessary dependencies:\
 `pip install pandas plotly-express dash`
 
+Put the .env file in the sites/ directory. This file contains the keys for 'GMAPS_KEY' and 'MAPBOX_KEY'
+
 
 ## To run
 Open a terminal window and run the app.py file: \

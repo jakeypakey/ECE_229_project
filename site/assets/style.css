@@ -17,6 +17,10 @@ Taken from https://codepen.io/chriddyp/pen/bWLwgP.css
 
 
 /* Grid –––––––––––––––––––––––––––––––––––––––––––––––––– */
+html {
+  scroll-behavior: smooth;
+}
+
 .container {
   position: relative;
   width: 100%;

@@ -20,9 +20,14 @@ app = dash.Dash(
 server = app.server
 directions_client = DirectionsClient()
 mapbox_access_token = config['MAPBOX_KEY']
-examplePolyline = 'q|sgExfmjUAu@zFBnEBnD?l@?PDTDJZl@tA~@bCh@rAPj@^lBF`ABhAAhAUnBS~@}@hCeDbJq@hBYbASz@OdAKnACt@?rADd@RrCJr@RfB@LCDAPBz@?`@CNQZWTWH]?]QWYM_@CYBi@L]HONINGFCRE|@AJAfIVh@?^IzH`@vAHbe@pBbKd@jLd@hAJfFj@~Ab@bCz@nAl@rC`BvUxNhDlBdAb@n@TxBl@bCh@v@HfALfQ~AdBBrC@fBGxBW~B[fAWbFcBtDwAzCcA`DgAzHiCrDmArCg@|B[d@E`DK`MAzIC`BGrD_@zAWlA[fAYhAe@fAc@jEkCd@_@hCgCdWoWnH}H|@_AnE}DhFmEpC{BrGkEjGkE`OuKjDkCbHsFhImGfFiDrEoCtCyAfGsCrKqEbI}DlIgEnCoAjDmAzC}@pE_AvEm@xBQxDOdEA~@?`BBvBPvCVrARlFh@`_@rDxBTvAFdB@fDQxF}@tJ}A~GmAdC_@xAY~@KtFaA~AWdLiBd@GhJ{AnIwAjUyDnDo@xCc@jBYjCg@pA_@tB_AvBqAj@e@tAqA|@iAtAsBp@cAlDqFbA_BrAeBbBgBrEwDzE_EjCgCdCaDlAeBt@oAh@eAjAyBxB}FtDmKrEeM`FeNtGwQ|@_Cr@}AxA}Bp@{@l@m@bEgDxN_MjHgGzBqBpCyBbH}FjC}B~BgBrAgAxAmAdHaGdJ}HnAgALBPAbBy@xAu@j@c@rCcDv@s@X_@hDyCbAw@~@]z@Sj@Od@UV[Vq@Dq@GcH?sDrF?nECzP?~EA'
-examplePath = polyline.decode(examplePolyline, geojson=True)
 
+# load the datasets
+latInitial = 32.880056457383546
+lonInitial =-117.23403033597369
+accidents = pd.read_csv("../data/accidents_visualization.csv")
+us_cities = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/us-cities-top-1k.csv")
+
+# set the site layout
 app.layout = html.Div(className='site-wrapper', children=[
     html.Div(className='row title-screen', children=[
         html.Div(className="twelve columns", children=[
@@ -62,13 +67,37 @@ app.layout = html.Div(className='site-wrapper', children=[
             )
         ]),
         html.Div(className="eight columns div-for-charts bg-grey", children=[
-            dcc.Graph(id="map-graph")
+            dcc.Graph(id="map-graph",
+                figure=go.Figure(
+                    data=[
+                        go.Scattermapbox(
+                            customdata=us_cities,
+                            lat=us_cities["lat"], 
+                            lon=us_cities["lon"], 
+                            hoverinfo='text',
+                            text=us_cities['City']
+                        )
+                    ],
+                    layout=go.Layout(
+                        autosize=True,
+                        margin=go.layout.Margin(l=0, r=35, t=0, b=0),
+                        showlegend=False,
+                        mapbox=dict(
+                            accesstoken=mapbox_access_token,
+                            center=dict(lat=latInitial, lon=lonInitial),  # 40.7272  # -73.991251
+                            style="dark",
+                            bearing=0,
+                            zoom=14,
+                        ),
+                    )
+                )
+            )
         ])
     ]),
     html.Div(className='row reference-screen', children=[
         html.H1('''References here''')
     ]),
-    dcc.Store(id='routes-json'),
+    dcc.Store(id='routes-json', data=[]),
     ],
 )
 
@@ -83,6 +112,7 @@ list_of_locations = {
     "Columbia University": {"lat": 40.8075, "lon": -73.9626},
     "United Nations HQ": {"lat": 40.7489, "lon": -73.9680},
 }
+
 
 @app.callback(
     Output('routes-json', 'data'),
@@ -111,30 +141,33 @@ def update_graph(routes_json):
     routes = json.loads(routes_json)
     route_geojson = [directions_client.get_geojson_from_route(r) for r in routes]
     route_colors = ['#f1a208', '#005377', '#052f5f']
+    print('mapview updated')
 
     latInitial = 32.880056457383546
     lonInitial =-117.23403033597369
 
-    return go.Figure(
-        data=[
+    route_data = [
             go.Scattermapbox(
-                lat=[list_of_locations[i]["lat"] for i in list_of_locations],
-                lon=[list_of_locations[i]["lon"] for i in list_of_locations],
-                mode="markers",
-                hoverinfo="text",
-                text=[i for i in list_of_locations],
-                marker=dict(size=8, color="#ffa0a0"),
-            )]
-            +
-            [go.Scattermapbox(
-                name='Example Route',
+                customdata=us_cities,
+                lat=us_cities["lat"], 
+                lon=us_cities["lon"], 
+                hoverinfo='text',
+                text=us_cities['City']
+            )
+        ]+[
+            go.Scattermapbox(
+                name='Route #{}'.format(i+1),
                 hoverinfo='name',
                 lat=np.array(route_coords)[:,1],
                 lon=np.array(route_coords)[:,0],
                 mode='lines',
                 line=dict(width=3, color=route_colors[i])
-            ) for i,route_coords in enumerate(route_geojson)]
-        ,
+            ) for i,route_coords in enumerate(route_geojson)
+        ]
+    route_data.reverse()
+
+    return go.Figure(
+        data=route_data,
         layout=go.Layout(
             autosize=True,
             margin=go.layout.Margin(l=0, r=35, t=0, b=0),

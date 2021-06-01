@@ -51,13 +51,17 @@ def name_to_figure(fig_name,fig_name2):
         fig_name = 'All'
     if fig_name2 == None or  'All' in fig_name2:
         fig_name2 = ''
+    elif 'All' in fig_name:
+        fig_name = ''
     else:
         fig_name2 = '+' + fig_name2
+    
         
     color_name = fig_name + fig_name2
     figure = px.choropleth(CA_dict_df, geojson=CA_counties, color=color_name,
                     locations="FIP", featureidkey="id",
                     projection="mercator"
                     ).update_geos(fitbounds="locations", visible=False)
-
+    figure.update_layout(margin={"r":0,"t":0,"l":0,"b":0},plot_bgcolor = "darkgrey")
+ 
     return dcc.Graph(figure=figure)

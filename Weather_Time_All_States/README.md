@@ -11,7 +11,8 @@
 
 ### To run:  
 Run All_States_Plots.ipynb  
-pkl file included  
+mod_fip_dict.pkl file included  
+co-est2020-alldata.csv file included  
 contact scw039@ucsd.edu for processed_data_all_states.csv
 
 ### Analysis:

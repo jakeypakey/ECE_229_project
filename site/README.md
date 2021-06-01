@@ -5,6 +5,7 @@
 `pip install python-dotenv`
 
 or use `bash setpy.sh`
+
 2.Put the .env file in the sites/ directory. This file contains the keys for 'GMAPS_KEY' and 'MAPBOX_KEY'
 
 ## To run

@@ -6,6 +6,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 import plotly.graph_objects as go
 import plotly.express as px
+import sys
 def load_obj(name ):
     with open('./' + name + '.pkl', 'rb') as f:
         return pickle.load(f)
@@ -45,153 +46,18 @@ def update_output(fig_name,fig_name2):
     return name_to_figure(fig_name,fig_name2)
 
 def name_to_figure(fig_name,fig_name2):
-    # Rain Weather
-    if fig_name == 'Rain' and fig_name2 == 'Day':
-        figure = px.choropleth(CA_dict_df, geojson=CA_counties, color='Rain+Day',
+    
+    if fig_name == None or 'All' in fig_name:
+        fig_name = 'All'
+    if fig_name2 == None or  'All' in fig_name2:
+        fig_name2 = ''
+    else:
+        fig_name2 = '+' + fig_name2
+        
+    color_name = fig_name + fig_name2
+    figure = px.choropleth(CA_dict_df, geojson=CA_counties, color=color_name,
                     locations="FIP", featureidkey="id",
                     projection="mercator"
                     ).update_geos(fitbounds="locations", visible=False)
 
-    elif fig_name == 'Rain' and fig_name2 == 'Noon': 
-        figure = px.choropleth(CA_dict_df, geojson=CA_counties, color='Rain+Noon',
-                    locations="FIP", featureidkey="id",
-                    projection="mercator"
-                    ).update_geos(fitbounds="locations", visible=False)
-
-    elif fig_name == 'Rain' and fig_name2 == 'Night': 
-        figure = px.choropleth(CA_dict_df, geojson=CA_counties, color='Rain+Night',
-                    locations="FIP", featureidkey="id",
-                    projection="mercator"
-                    ).update_geos(fitbounds="locations", visible=False)
-    elif fig_name == 'Rain' and fig_name2 == 'All Times of Day': 
-        figure = px.choropleth(CA_dict_df, geojson=CA_counties, color='Rain',
-                    locations="FIP", featureidkey="id",
-                    projection="mercator"
-                    ).update_geos(fitbounds="locations", visible=False)    
-    # Clear Weather
-    elif fig_name == 'Clear' and fig_name2 == 'Day': 
-        figure = px.choropleth(CA_dict_df, geojson=CA_counties, color='Clear+Day',
-                    locations="FIP", featureidkey="id",
-                    projection="mercator"
-                    ).update_geos(fitbounds="locations", visible=False)
-    elif fig_name == 'Clear' and fig_name2 == 'Noon': 
-        figure = px.choropleth(CA_dict_df, geojson=CA_counties, color='Clear+Noon',
-                    locations="FIP", featureidkey="id",
-                    projection="mercator"
-                    ).update_geos(fitbounds="locations", visible=False)
-    elif fig_name == 'Clear' and fig_name2 == 'Night': 
-        figure = px.choropleth(CA_dict_df, geojson=CA_counties, color='Clear+Night',
-                    locations="FIP", featureidkey="id",
-                    projection="mercator"
-                    ).update_geos(fitbounds="locations", visible=False)
-    elif fig_name == 'Clear' and fig_name2 == 'All Times of Day': 
-        figure = px.choropleth(CA_dict_df, geojson=CA_counties, color='Clear',
-                    locations="FIP", featureidkey="id",
-                    projection="mercator"
-                    ).update_geos(fitbounds="locations", visible=False)
-    # Fog Weather
-    elif fig_name == 'Fog' and fig_name2 == 'Day': 
-        figure = px.choropleth(CA_dict_df, geojson=CA_counties, color='Fog+Day',
-                    locations="FIP", featureidkey="id",
-                    projection="mercator"
-                    ).update_geos(fitbounds="locations", visible=False)
-    elif fig_name == 'Fog' and fig_name2 == 'Noon': 
-        figure = px.choropleth(CA_dict_df, geojson=CA_counties, color='Fog+Noon',
-                    locations="FIP", featureidkey="id",
-                    projection="mercator"
-                    ).update_geos(fitbounds="locations", visible=False)
-    elif fig_name == 'Fog' and fig_name2 == 'Night': 
-        figure = px.choropleth(CA_dict_df, geojson=CA_counties, color='Fog+Night',
-                    locations="FIP", featureidkey="id",
-                    projection="mercator"
-                    ).update_geos(fitbounds="locations", visible=False)
-    elif fig_name == 'Fog' and fig_name2 == 'All Times of Day': 
-        figure = px.choropleth(CA_dict_df, geojson=CA_counties, color='Fog',
-                    locations="FIP", featureidkey="id",
-                    projection="mercator"
-                    ).update_geos(fitbounds="locations", visible=False)
-    # Snow Weather
-    elif fig_name == 'Snow' and fig_name2 == 'Day': 
-        figure = px.choropleth(CA_dict_df, geojson=CA_counties, color='Snow+Day',
-                    locations="FIP", featureidkey="id",
-                    projection="mercator"
-                    ).update_geos(fitbounds="locations", visible=False)
-    elif fig_name == 'Snow' and fig_name2 == 'Noon': 
-        figure = px.choropleth(CA_dict_df, geojson=CA_counties, color='Snow+Noon',
-                    locations="FIP", featureidkey="id",
-                    projection="mercator"
-                    ).update_geos(fitbounds="locations", visible=False)
-    elif fig_name == 'Snow' and fig_name2 == 'Night': 
-        figure = px.choropleth(CA_dict_df, geojson=CA_counties, color='Snow+Night',
-                    locations="FIP", featureidkey="id",
-                    projection="mercator"
-                    ).update_geos(fitbounds="locations", visible=False)
-    elif fig_name == 'Snow' and fig_name2 == 'All Times of Day': 
-        figure = px.choropleth(CA_dict_df, geojson=CA_counties, color='Snow',
-                    locations="FIP", featureidkey="id",
-                    projection="mercator"
-                    ).update_geos(fitbounds="locations", visible=False)
-    # Cloudy Weather
-    elif fig_name == 'Cloudy' and fig_name2 == 'Day': 
-        figure = px.choropleth(CA_dict_df, geojson=CA_counties, color='Cloudy+Day',
-                    locations="FIP", featureidkey="id",
-                    projection="mercator"
-                    ).update_geos(fitbounds="locations", visible=False)
-    elif fig_name == 'Cloudy' and fig_name2 == 'Noon': 
-        figure = px.choropleth(CA_dict_df, geojson=CA_counties, color='Cloudy+Noon',
-                    locations="FIP", featureidkey="id",
-                    projection="mercator"
-                    ).update_geos(fitbounds="locations", visible=False)
-    elif fig_name == 'Cloudy' and fig_name2 == 'Night': 
-        figure = px.choropleth(CA_dict_df, geojson=CA_counties, color='Cloudy+Night',
-                    locations="FIP", featureidkey="id",
-                    projection="mercator"
-                    ).update_geos(fitbounds="locations", visible=False)
-    elif fig_name == 'Cloudy' and fig_name2 == 'All Times of Day': 
-        figure = px.choropleth(CA_dict_df, geojson=CA_counties, color='Cloudy',
-                    locations="FIP", featureidkey="id",
-                    projection="mercator"
-                    ).update_geos(fitbounds="locations", visible=False)
-    # Dust Weather
-    elif fig_name == 'Dust' and fig_name2 == 'Day': 
-        figure = px.choropleth(CA_dict_df, geojson=CA_counties, color='Dust+Day',
-                    locations="FIP", featureidkey="id",
-                    projection="mercator"
-                    ).update_geos(fitbounds="locations", visible=False)
-    elif fig_name == 'Dust' and fig_name2 == 'Noon': 
-        figure = px.choropleth(CA_dict_df, geojson=CA_counties, color='Dust+Noon',
-                    locations="FIP", featureidkey="id",
-                    projection="mercator"
-                    ).update_geos(fitbounds="locations", visible=False)
-    elif fig_name == 'Dust' and fig_name2 == 'Night': 
-        figure = px.choropleth(CA_dict_df, geojson=CA_counties, color='Dust+Night',
-                    locations="FIP", featureidkey="id",
-                    projection="mercator"
-                    ).update_geos(fitbounds="locations", visible=False)
-    elif fig_name == 'Dust' and fig_name2 == 'All Times of Day': 
-        figure = px.choropleth(CA_dict_df, geojson=CA_counties, color='Dust',
-                    locations="FIP", featureidkey="id",
-                    projection="mercator"
-                    ).update_geos(fitbounds="locations", visible=False)
-    # For All time of Day
-    elif fig_name == 'All Weather' and fig_name2 == 'Day': 
-        figure = px.choropleth(CA_dict_df, geojson=CA_counties, color='Day',
-                    locations="FIP", featureidkey="id",
-                    projection="mercator"
-                    ).update_geos(fitbounds="locations", visible=False)
-    elif fig_name == 'All Weather' and fig_name2 == 'Noon': 
-        figure = px.choropleth(CA_dict_df, geojson=CA_counties, color='Noon',
-                    locations="FIP", featureidkey="id",
-                    projection="mercator"
-                    ).update_geos(fitbounds="locations", visible=False)
-    elif fig_name == 'All Weather' and fig_name2 == 'Night': 
-        figure = px.choropleth(CA_dict_df, geojson=CA_counties, color='Night',
-                    locations="FIP", featureidkey="id",
-                    projection="mercator"
-                    ).update_geos(fitbounds="locations", visible=False)
-    elif fig_name == 'All Weather' and fig_name2 == 'All Times of Day': 
-        figure = px.choropleth(CA_dict_df, geojson=CA_counties, color='All',
-                    locations="FIP", featureidkey="id",
-                    projection="mercator"
-                    ).update_geos(fitbounds="locations", visible=False)
     return dcc.Graph(figure=figure)

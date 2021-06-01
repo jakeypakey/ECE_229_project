@@ -8,7 +8,7 @@ import plotly.graph_objects as go
 import plotly.express as px
 import sys
 def load_obj(name ):
-    with open('./' + name + '.pkl', 'rb') as f:
+    with open('./data/' + name + '.pkl', 'rb') as f:
         return pickle.load(f)
 CA_name = 'CA'
 CA_counties_name = 'CA_county' 

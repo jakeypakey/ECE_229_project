@@ -60,8 +60,12 @@ def name_to_figure(fig_name,fig_name2):
     color_name = fig_name + fig_name2
     figure = px.choropleth(CA_dict_df, geojson=CA_counties, color=color_name,
                     locations="FIP", featureidkey="id",
-                    projection="mercator"
-                    ).update_geos(fitbounds="locations", visible=False)
-    figure.update_layout(margin={"r":0,"t":0,"l":0,"b":0},plot_bgcolor = "darkgrey")
+                    projection="mercator",range_color=(0, 1e4)
+                    ).update_geos(fitbounds="locations", visible=False,    resolution=50,
+    showcoastlines=True, coastlinecolor="RebeccaPurple",
+    showland=True, landcolor="lightslategray",
+    showocean=True, oceancolor="LightGrey",
+    showcountries =True)
+    figure.update_layout(margin={"r":0,"t":0,"l":0,"b":0},paper_bgcolor = "#323232")
  
     return dcc.Graph(figure=figure)

@@ -7,7 +7,7 @@ from dash.dependencies import Input, Output
 from app import app
 
 # load dataset
-accidents = pd.read_csv("../data/accidents_visualization.csv")
+accidents = pd.read_csv("data/accidents_visualization.csv")
 
 fig = px.choropleth(accidents,               
                   locations="State",               

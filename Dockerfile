@@ -8,4 +8,4 @@ WORKDIR "/site"
 RUN conda config --add channels conda-forge
 RUN conda install --file /tmp/requirements.txt
 
-CMD gunicorn --bind 0.0.0.0:80 wsgi
+CMD gunicorn index:server --bind 0.0.0.0:80 

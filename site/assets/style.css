@@ -53,7 +53,7 @@ html {
 } */
 
 .title-screen {
-  height: 20vh;
+  height: 20%;
 }
 
 .center-title {
@@ -61,6 +61,11 @@ html {
   justify-content: center;
   text-align: center;
   align-items: center;
+
+}
+
+.map-row {
+  margin-bottom: 30px;
 
 }
 
@@ -75,6 +80,25 @@ html {
   display: flex;
 }
 
+.center {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+
+.input-field {
+  border: #bbb;
+  border-radius: 5px;
+  /* background-color: #f9f9f9; */
+  background-color: #fff;
+  margin: 20% 10px;
+  padding: 10px;
+  position: relative;
+  border-style: solid;
+  box-shadow: 2px 2px 2px lightgray;
+
+}
+
 .pretty_container {
   border-radius: 5px;
   /* background-color: #f9f9f9; */
@@ -84,7 +108,7 @@ html {
   position: relative;
   box-shadow: 2px 2px 2px lightgray;
 }
-
+/* 
 .content-screen.first {
   background-color: #555;
 }
@@ -99,7 +123,7 @@ html {
 
 .reference-screen {
   background-color: #1e1e1e
-}
+} */
 
 /* For devices larger than 400px */
 @media (min-width: 400px) {
@@ -491,7 +515,7 @@ html, body{
 
 body {
   /* background-color: #1E1E1E; */
-  background-color: #f9f9f9;
+  background-color: #f2f2f2;
   /* color: #d8d8d8; */
   color:#1E1E1E;
   height: 100%;
@@ -503,14 +527,15 @@ body {
   height: 100%;
 }
 
-h1, h2, h3, h4, h5 {
-  font-family: "Open Sans Semi Bold";
-  letter-spacing: 2.1px;
-  font-size: 21px;
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Helvetica";
+  /* letter-spacing: 1px; */
+  font-size: 20;
   padding-left: 12px;
+  text-align: center;
 }
 p {
-  font-family: "Open Sans Light";
+  font-family: "Helvetica";
   font-weight: 400;
   font-size: 14px;
   padding-left: 12px;
@@ -524,11 +549,16 @@ a {
 .text-padding{
   padding: 5px;
 }
+
+.text-input {
+  width:100%; 
+
+}
 /* Graph Layout ––––––––––––––––––––––––––––––––––––––––––––––––––*/
 .div-for-charts{
   display: flex;
   flex-direction: column;
-  height: 70vh;
+  height: 50%;
   width: 100%;
 }
 #histogram {
@@ -542,8 +572,6 @@ a {
 }
 /* Graph Control Objects ––––––––––––––––––––––––––––––––––––––––––––––––––*/
 .div-user-controls {
-  padding-left: 55px;
-  padding-top: 64px;
   color: rgb(50, 50, 50)
 }
 .div-for-dropdown {

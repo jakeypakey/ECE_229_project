@@ -42,11 +42,11 @@ layout = html.Div(id='states-screen', className='row flex-display', children=
     [
         html.Div(className="pretty_container four columns", children=
         [
-            html.H2("Number of accidents for each state"),
-            html.Div(
+            html.H4("Number of accidents for each state"),
+            html.Div(className='input-field', children=
             [
                 html.Div([
-                    html.H3('States'),
+                    html.H5('States'),
                     dcc.Dropdown(
                         options=states_dict,
                         multi=True,
@@ -55,9 +55,9 @@ layout = html.Div(id='states-screen', className='row flex-display', children=
                     )  
                 ]),
             ]),
-            html.Div(
+            html.Div( className='input-field', children=
             [
-                html.H3('Normalization'),
+                html.H5('Normalization'),
                 dcc.RadioItems(
                     options=[
                         {'label': 'without Normalization', 'value': 'without Normalization'},

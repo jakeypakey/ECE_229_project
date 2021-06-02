@@ -6,17 +6,14 @@ import plotly.graph_objects as go
 import plotly.express as px
 import pickle
 import pandas as pd
-from utils.dataOverviewUtil import preprocessFeatureData
-
+from utils.dataOverviewUtil import drawImportanceChart 
 
 # load datasets
 sources = pickle.load(open('../data/sourceDist.pkl', 'rb'))
 quants = pd.Series(pickle.load(open('../data/quants.pkl', 'rb')))
 feat = pickle.load(open('../data/featureImportance.pkl', 'rb'))
-final = preprocessFeatureData(feat)
-
-
-# process importance
+figure_importance = drawImportanceChart(feat)
+data_sources= {'Source':list(sources.keys()),'Count':list(sources.values())}
 
 layout = html.Div(id='data-overview-screen', className='', children=
     [
@@ -24,15 +21,17 @@ layout = html.Div(id='data-overview-screen', className='', children=
         [
             html.Div(className='pretty_container six columns', children= 
             [
+                html.H4('Data Sources'),
                 dcc.Graph(id='source-distributions',
-                    figure=px.bar(sources,title='Data Sources')
+                    figure=px.pie(data_sources, names='Source',values='Count')
                 ),
 
             ]),
             html.Div(className='pretty_container six columns', children=
             [
+                html.H4('Features Impacting Accident Duration'),
                 dcc.Graph(id='importance',
-                    figure=px.pie(final,values='Impact',names='Feature',title='Feature Importance')
+                    figure=figure_importance
                 )
             ]),
         ]),

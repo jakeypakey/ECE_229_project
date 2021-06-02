@@ -4,9 +4,11 @@ import pandas as pd
 import pickle
 
 def plotSources():
-    with  open('../data/sourceDist.pkl','rb') as fi:
+    with open('../data/sourceDist.pkl','rb') as fi:
         sources = pickle.load(fi)
-    return px.bar(sources,title='Data Sources',labels={'index':'Data source','value':'Number of points'})
+    final = {'Source':list(sources.keys()),'Count':list(sources.values())}
+    #return final
+    return px.pie(final,title='Data sources',names='Source',values='Count')
 def plotQuantiles():
     with open('../data/quants.pkl','rb') as fi:
         quants = pd.Series(pickle.load(fi))
@@ -17,13 +19,17 @@ def plotImportance():
     values,labels = [x[1] for x in feat],[x[0] for x in feat]
     values/=sum(values)
     other = 0
-    final = {'Feature': [],'Impact':[]}
+    final = {'Feature': [],'Impact as a Percentage':[]}
     for k,v in zip(labels,values):
-        if v < .02:
+        if v < .03:
             other+=v
         else:
-            final['Feature'].append(k)
-            final['Impact'].append(v)
+            final['Feature'].append(k.replace('_', ' ').replace('(',' (').replace('(F)','(℉)').replace('Pressure (in)','Atmospheric Pressure (inHg)'))
+            final['Impact as a Percentage'].append(v*100)
     final['Feature'].append('Others')
-    final['Impact'].append(other)
-    return px.pie(final,values='Impact',names='Feature',title='Feature Importance')
+    final['Impact as a Percentage'].append(100*other)
+    figB = px.bar(final,title='Features impacting accident duration',x='Feature',y='Impact as a Percentage')
+    
+    figB.update_yaxes(ticksuffix="%", showgrid=True)
+    return figB
+

@@ -67,16 +67,16 @@ layout = html.Div(className='', children=
                 dcc.Graph(id="graph-comparison",style={"height": 500}),
             ]),
         ]),
-        html.Div(className='row flex-display', children=
+        html.Div(className='', children=
         [
-            html.Div(className='pretty_container twelve columns', children=
+            html.Div(className='pretty_container ', children=
                 [
                     # html.H2("Comparisons"),
-                    html.Div(className='two columns', children=
+                    html.Div(className='row flex-display', children=
                         [
-                            html.Div(
+                            html.Div(className='input-field', children=
                                 [
-                                    html.H3('States'),
+                                    html.H5('States'),
                                     dcc.Dropdown(
                                         options=states_dict,
                                         multi=False,
@@ -85,9 +85,9 @@ layout = html.Div(className='', children=
                                     )
                                 ]
                             ),
-                            html.Div(
+                            html.Div(className='input-field', children=
                                 [
-                                    html.H3('Feature 1'),
+                                    html.H5('Feature 1'),
                                     dcc.Dropdown(
                                         options=features_dict,
                                         multi=False,
@@ -96,9 +96,9 @@ layout = html.Div(className='', children=
                                     ),
                                 ]
                             ),
-                            html.Div(
+                            html.Div(className='input-field', children=
                                 [
-                                    html.H3('Feature 2'),
+                                    html.H5('Feature 2'),
                                     dcc.Dropdown(
                                         options=features_dict,
                                         multi=False,
@@ -110,7 +110,7 @@ layout = html.Div(className='', children=
 
                         ]
                     ),
-                    html.Div(className='ten columns', children=
+                    html.Div(className='row', children=
                         [
                             dcc.Slider(
                                 min=2016,

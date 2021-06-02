@@ -6,11 +6,11 @@ import pickle
 def plotSources():
     with  open('../data/sourceDist.pkl','rb') as fi:
         sources = pickle.load(fi)
-    return px.bar(sources,title='Data Sources')
+    return px.bar(sources,title='Data Sources',labels={'index':'Data source','value':'Number of points'})
 def plotQuantiles():
     with open('../data/quants.pkl','rb') as fi:
         quants = pd.Series(pickle.load(fi))
-    return px.bar(quants,title='Quantiles of accident Duration')
+    return px.bar(quants,title='Quantiles of accident Duration',labels={'index':'Quantile','value':'Duration of accident (minutes)'})
 def plotImportance():
     with open('../data/featureImportance.pkl','rb') as fi:
         feat = pickle.load(fi)

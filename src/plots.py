@@ -12,7 +12,8 @@ def plotSources():
 def plotQuantiles():
     with open('../data/quants.pkl','rb') as fi:
         quants = pd.Series(pickle.load(fi))
-    return px.bar(quants,title='Quantiles of accident Duration',labels={'index':'Quantile','value':'Duration of accident (minutes)'})
+        quants = quants.apply(lambda x: x/60)
+    return px.bar(quants,title='Distribution of accident Duration',labels={'index':'Quantile','value':'Duration of accident (hours)'})
 def plotImportance(vertical=False):
     with open('../data/featureImportance.pkl','rb') as fi:
         feat = pickle.load(fi)

@@ -26,7 +26,6 @@ Run All_States_Plots.ipynb
 -Clear weather seems to generally have more accidents than any other weather condition. This seems to be true regardless of population size or location	
 	- For instance, in Alameda county (FIP id 06001), accidents per 1000 people go up from 2.16 in rainy condition to 13.06 in clear conditions
 - Snow doesn't affect all areas equally for obvious reaons. Counties with extremely high rates of snow correlates with high incidence rate, but generally snowy areas don't seem experience a significant change in accident rate in under snowy conditions. Maine is one of the snowiest states in the US, averaging around 50-70 inches in the Coastal Division and 90 to 110 inches in the Northern Interior. However, Maine has more accidents in clear weather than in snowy weather. Under snowy conditions, for every 1000 people, Cumberland County (23005) has 0.231 accidents, but has 1.27 accidents under clear conditions. In a more extreme example, Alpine County of California averages around 192 inches of snow a year, but has up to 33 snow related accidents per 1000 people. It also has around 30 accidents per 1000 people under clear conditions.
-
 - Counties with high accident rates in any one weather condition are likely to also have high accident rates under all weather conditions.
 
 -Potential biases

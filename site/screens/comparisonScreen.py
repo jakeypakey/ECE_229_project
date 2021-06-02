@@ -64,6 +64,7 @@ layout = html.Div(className='', children=
         html.Div(className='row flex-display', children=[
             html.Div(className="pretty_container twelve columns", children= 
             [
+                html.H4('Comparison of Accidents between Two Features'),
                 dcc.Graph(id="graph-comparison",style={"height": 500}),
             ]),
         ]),

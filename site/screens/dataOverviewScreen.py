@@ -39,8 +39,9 @@ layout = html.Div(id='data-overview-screen', className='', children=
         [
             html.Div(className='pretty_container twelve columns', children= 
             [
+                html.H4('Distribution of Accident Duration'),
                 dcc.Graph(id='quantiles-accident-duration',
-                    figure=px.bar(quants,title='Quantiles of accident Duration')
+                    figure=px.bar(quants,labels={'index':'Quantile','value':'Duration of accident (hours)'})
                 ),
             ]),
         ])

@@ -38,35 +38,41 @@ States_names.insert(0,'All')
 states_dict = [{'label': state, 'value': state} for state in States_names]
 
 
-layout = html.Div([
-    html.H2("Number of accidents for each state"),
-    html.Div([
+layout = html.Div(id='states-screen', className='content-screen row', children=
+    [
+        html.H2("Number of accidents for each state"),
         html.Div([
-            html.H3('States'),
-            dcc.Dropdown(
-                options=states_dict,
-                multi=True,
-                value=["All"],
-                id="states"
-            )  
-        ], className="six columns"),
-        
-        html.Div([
-            html.H3('Normalization'),
-            dcc.RadioItems(
-                options=[
-                    {'label': 'without Normalization', 'value': 'without Normalization'},
-                    {'label': 'per million people', 'value': 'per million people'}
-                ],
-                value='per million people',
-                id='normalization'
+            html.Div([
+                html.H3('States'),
+                dcc.Dropdown(
+                    options=states_dict,
+                    multi=True,
+                    value=["All"],
+                    id="states"
                 )  
-        ], className="six columns"),
+            ], className="six columns"),
+            
+            html.Div([
+                html.H3('Normalization'),
+                dcc.RadioItems(
+                    options=[
+                        {'label': 'without Normalization', 'value': 'without Normalization'},
+                        {'label': 'per million people', 'value': 'per million people'}
+                    ],
+                    value='per million people',
+                    id='normalization'
+                    )  
+            ], className="six columns"),
         
         
     ], className="container"),
 
-    dcc.Graph(id="graph",style={"height": 500})
+    dcc.Graph(id="graph",style={"height": 500}),
+    html.Div(className='nav-button-next', children=
+        [
+            html.A('Next', href='#conditions-screen')
+        ]
+    )
     
 ])
 

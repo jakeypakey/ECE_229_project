@@ -15,10 +15,17 @@ Taken from https://codepen.io/chriddyp/pen/bWLwgP.css
  - Media Queries
  - Custom App CSS */
 
-
 /* Grid –––––––––––––––––––––––––––––––––––––––––––––––––– */
 html {
   scroll-behavior: smooth;
+}
+
+.nav-button-next {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background-color: white;
+  border: 2px solid #c00;
 }
 
 .container {
@@ -37,7 +44,8 @@ html {
 
 .title-screen {
   display: flex;
-  height: 50vh;
+  position: relative;
+  height: 100vh;
   background-color: #333;
   justify-content: center;
   text-align: center;
@@ -45,7 +53,9 @@ html {
 }
 
 .content-screen {
+  position: relative;
   height:100vh
+
 }
 
 .content-screen.first {

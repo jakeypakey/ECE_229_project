@@ -49,7 +49,16 @@ fig_dropdown = html.Div([html.Div([
     )]) ]) #new
 
 fig_plot = html.Div(id='fig_plot')
-layout = html.Div([fig_dropdown, fig_plot])
+layout = html.Div(id='conditions-screen', className='content-screen row', children=
+    [
+        fig_dropdown, 
+        fig_plot,
+        html.Div(className='nav-button-next', children=
+            [
+                html.A('Next', href='#map-screen')
+            ]
+        )
+    ])
 
 
 @app.callback(dash.dependencies.Output('fig_plot', 'children'), [dash.dependencies.Input('fig_dropdown', 'value'),\

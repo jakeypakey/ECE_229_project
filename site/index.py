@@ -5,11 +5,12 @@ from dotenv import dotenv_values
 config = dotenv_values('.env')
 
 from app import app, server
-from screens import titleScreen, statesScreen, conditionsScreen, mapScreen
+from screens import dataOverviewScreen, titleScreen, statesScreen, conditionsScreen, mapScreen
 
 app.layout = html.Div(id='page-content', children=
 [
     titleScreen.layout,
+    dataOverviewScreen.layout,
     statesScreen.layout,
     conditionsScreen.layout,
     mapScreen.layout

@@ -29,7 +29,7 @@ all_state_dict = load_obj('all_state_dict')
 fig_names = ['AL', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY',
                  'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND',
                  'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']
-fig_names2 = ['Rain', 'Clear','Fog','Snow','Cloudy', 'All Weather']
+fig_names2 = ['Rain', 'Clear','Fog','Snow','Cloudy','Dust', 'All Weather']
 fig_names3 = ['Day','Noon','Night', 'All Times of Day']
 
 layout = html.Div(id='conditions-screen', className='row flex-display', children=
@@ -40,7 +40,7 @@ layout = html.Div(id='conditions-screen', className='row flex-display', children
             ]
         ),
         html.Div(className='pretty_container four columns', children=
-            [
+            [   html.P('Accidents per 1000 people'),
                 html.Div(
                     [
                         dcc.Dropdown(
@@ -67,7 +67,8 @@ layout = html.Div(id='conditions-screen', className='row flex-display', children
                             value='All Times of Day'
                         )
                     ]
-                ) 
+                ),
+                
             ]
         ),
         # html.Div(className='nav-button-next', children=

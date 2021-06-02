@@ -6,66 +6,84 @@ import dash_core_components as dcc
 import dash_html_components as html
 import plotly.graph_objects as go
 import plotly.express as px
-import sys
+import numpy as np
+import json
+from urllib.request import urlopen
+def get_counties(starter_fip):
+    '''
+    Function: Get the geojson dictionary necessary for DASH plot
+    Input: Starter 2 digit value of FIP for a specific state (i.e. '06' for California)
+    Output: Dictionary needed for plotting
+    '''
+    with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json') as response:
+        counties = json.load(response)
+    CA_counties = {'type':'FeatureCollection','features':[]}
+    for info in counties['features']:
+        if info['properties']['STATE'] == starter_fip:
+            CA_counties['features'].append(info)
+    return CA_counties
 def load_obj(name ):
     with open('./data/' + name + '.pkl', 'rb') as f:
         return pickle.load(f)
-CA_name = 'CA'
-CA_counties_name = 'CA_county' 
-CA_dict_df = load_obj(CA_name)
-CA_counties = load_obj(CA_counties_name)
-fig_names = ['Rain', 'Clear','Fog','Snow','Cloudy','Dust', 'All Weather']
-fig_names2 = ['Day','Noon','Night', 'All Times of Day']     
+all_state_dict = load_obj('all_state_dict')
+fig_names = ['AL', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY',
+                 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND',
+                 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']
+fig_names2 = ['Rain', 'Clear','Fog','Snow','Cloudy','Dust', 'All Weather']
+fig_names3 = ['Day','Noon','Night', 'All Times of Day']
 fig_dropdown = html.Div([html.Div([
     dcc.Dropdown(
         id='fig_dropdown',
         options=[{'label': x, 'value': x} for x in fig_names],
-        value=None
+        value='CA'
     )]), html.Div([
     dcc.Dropdown(
         id='fig_dropdown2',
         options=[{'label': x, 'value': x} for x in fig_names2],
-        value=None
+        value='All Weather'
+    )]), html.Div([
+    dcc.Dropdown(
+        id='fig_dropdown3',
+        options=[{'label': x, 'value': x} for x in fig_names3],
+        value='All Times of Day'
     )]) ]) #new
 
 fig_plot = html.Div(id='fig_plot')
-app.layout = html.Div([fig_dropdown, fig_plot])
-layout = html.Div(className='row content-screen second', children=
-    [
-        html.H1('''Section 2: Traffic Collisions by Condition'''),
-        fig_dropdown,
-        fig_plot
-        
-    ]
-)
+layout = html.Div([fig_dropdown, fig_plot])
 
 
-@app.callback(dash.dependencies.Output('fig_plot', 'children'), [dash.dependencies.Input('fig_dropdown', 'value'),dash.dependencies.Input('fig_dropdown2', 'value')])
+@app.callback(dash.dependencies.Output('fig_plot', 'children'), [dash.dependencies.Input('fig_dropdown', 'value'),\
+                                                                 dash.dependencies.Input('fig_dropdown2', 'value'),\
+                                                                 dash.dependencies.Input('fig_dropdown3', 'value')])
 
-def update_output(fig_name,fig_name2):
-    return name_to_figure(fig_name,fig_name2)
 
-def name_to_figure(fig_name,fig_name2):
-    
+def update_output(fig_name,fig_name2, fig_name3):
+    return name_to_figure(fig_name,fig_name2, fig_name3)
+
+def name_to_figure(fig_name,fig_name2, fig_name3):
     if fig_name == None or 'All' in fig_name:
-        fig_name = 'All'
-    if fig_name2 == None or  'All' in fig_name2:
+        fig_name = 'CA'
+    if fig_name2 == None or 'All' in fig_name2:
+        fig_name2 = 'All'
+    if fig_name3 == None or  'All' in fig_name3:
+        fig_name3 = ''
+    elif 'All' in fig_name2:
         fig_name2 = ''
-    elif 'All' in fig_name:
-        fig_name = ''
     else:
-        fig_name2 = '+' + fig_name2
-    
-        
-    color_name = fig_name + fig_name2
+        fig_name3 = '+' + fig_name3
+    CA_dict_df = all_state_dict[fig_name]
+    state_code_start = np.array(CA_dict_df)[0,-1][:2]
+    CA_counties = get_counties(state_code_start) 
+    color_name = fig_name2 + fig_name3
+    quantile75 = CA_dict_df[color_name].median() *3
+    quantile0 = CA_dict_df[color_name].min()
     figure = px.choropleth(CA_dict_df, geojson=CA_counties, color=color_name,
-                    locations="FIP", featureidkey="id",
-                    projection="mercator",range_color=(0, 1e4)
-                    ).update_geos(fitbounds="locations", visible=False,    resolution=50,
-    showcoastlines=True, coastlinecolor="RebeccaPurple",
-    showland=True, landcolor="lightslategray",
-    showocean=True, oceancolor="LightGrey",
-    showcountries =True)
+                locations="FIP", featureidkey="id",
+                projection="mercator",range_color=(quantile0, quantile75)
+                ).update_geos(fitbounds="locations", visible=False,    resolution=50,
+                    showcoastlines=True, coastlinecolor="RebeccaPurple",
+                    showland=True, landcolor="lightslategray",
+                    showocean=True, oceancolor="LightGrey",
+                    showcountries =True)
     figure.update_layout(margin={"r":0,"t":0,"l":0,"b":0},paper_bgcolor = "#323232")
- 
     return dcc.Graph(figure=figure)

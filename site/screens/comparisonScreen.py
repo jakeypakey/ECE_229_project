@@ -70,12 +70,12 @@ layout = html.Div(className='', children=
         ]),
         html.Div(className='', children=
         [
-            html.Div(className='pretty_container ', children=
+            html.Div(className='pretty_container', children=
                 [
                     # html.H2("Comparisons"),
                     html.Div(className='row flex-display', children=
                         [
-                            html.Div(className='input-field', children=
+                            html.Div(className='input-field mini-container', children=
                                 [
                                     html.H5('States'),
                                     dcc.Dropdown(
@@ -86,7 +86,7 @@ layout = html.Div(className='', children=
                                     )
                                 ]
                             ),
-                            html.Div(className='input-field', children=
+                            html.Div(className='input-field mini-container', children=
                                 [
                                     html.H5('Feature 1'),
                                     dcc.Dropdown(
@@ -97,7 +97,7 @@ layout = html.Div(className='', children=
                                     ),
                                 ]
                             ),
-                            html.Div(className='input-field', children=
+                            html.Div(className='input-field mini-container', children=
                                 [
                                     html.H5('Feature 2'),
                                     dcc.Dropdown(

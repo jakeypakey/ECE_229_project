@@ -7,7 +7,7 @@ import plotly.express as px
 import pickle
 import pandas as pd
 from utils.dataOverviewUtil import preprocessFeatureData
-
+from .plots import *
 
 # load datasets
 sources = pickle.load(open('../data/sourceDist.pkl', 'rb'))
@@ -25,14 +25,14 @@ layout = html.Div(id='data-overview-screen', className='', children=
             html.Div(className='pretty_container six columns', children= 
             [
                 dcc.Graph(id='source-distributions',
-                    figure=px.bar(sources,title='Data Sources')
+                    figure=plotSources()
                 ),
 
             ]),
             html.Div(className='pretty_container six columns', children=
             [
                 dcc.Graph(id='importance',
-                    figure=px.pie(final,values='Impact',names='Feature',title='Feature Importance')
+                    figure=plotImportance(vertical=True)
                 )
             ]),
         ]),
@@ -41,7 +41,7 @@ layout = html.Div(id='data-overview-screen', className='', children=
             html.Div(className='pretty_container twelve columns', children= 
             [
                 dcc.Graph(id='quantiles-accident-duration',
-                    figure=px.bar(quants,title='Quantiles of accident Duration')
+                    figure=plotQuantiles()
                 ),
             ]),
         ])

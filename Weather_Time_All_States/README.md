@@ -24,7 +24,6 @@ Run All_States_Plots.ipynb
 -Rainy conditions seems to have generally low levels of incidence. 
 
 -Clear weather seems to generally have more accidents than any other weather condition. This seems to be true regardless of population size or location	
-	
 	- For instance, in Alameda county (FIP id 06001), accidents per 1000 people go up from 2.16 in rainy condition to 13.06 in clear conditions
 	
 	

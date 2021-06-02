@@ -31,7 +31,7 @@ html {
 .container {
   position: relative;
   width: 100%;
-  max-width: 960px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 0 20px;
   box-sizing: border-box;
@@ -42,20 +42,47 @@ html {
   box-sizing: border-box;
 }
 
-.title-screen {
+/* .title-screen {
   display: flex;
   position: relative;
-  height: 100vh;
+  height: 20vh;
   background-color: #333;
   justify-content: center;
   text-align: center;
   align-items: center;
+} */
+
+.title-screen {
+  height: 20vh;
+}
+
+.center-title {
+  display:flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+
 }
 
 .content-screen {
   position: relative;
-  height:100vh
+  height:100vh;
+  width:80%;
 
+}
+
+.flex-display {
+  display: flex;
+}
+
+.pretty_container {
+  border-radius: 5px;
+  /* background-color: #f9f9f9; */
+  background-color: #fff;
+  margin: 10px;
+  padding: 15px;
+  position: relative;
+  box-shadow: 2px 2px 2px lightgray;
 }
 
 .content-screen.first {
@@ -463,8 +490,10 @@ html, body{
 }
 
 body {
-  background-color: #1E1E1E;
-  color: #d8d8d8;
+  /* background-color: #1E1E1E; */
+  background-color: #f9f9f9;
+  /* color: #d8d8d8; */
+  color:#1E1E1E;
   height: 100%;
   margin: 0;
   padding: 0;
@@ -499,7 +528,7 @@ a {
 .div-for-charts{
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 70vh;
   width: 100%;
 }
 #histogram {
@@ -530,8 +559,10 @@ a {
   padding-bottom: 12px;
 }
 .Select-control, .Select-menu-outer, .Select-multi-value-wrapper, .select-up, .is-open .Select-control {
-  background-color: #1E1E1E;
-  color: white;
+  /* background-color: #1E1E1E; */
+  background-color: #fff;
+  /* color: white; */
+  color: #33C3F0;
 
 }
 

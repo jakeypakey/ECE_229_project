@@ -18,30 +18,37 @@ final = preprocessFeatureData(feat)
 
 # process importance
 
-layout = html.Div(id='data-overview-screen', className='content-screen', children=
+layout = html.Div(id='data-overview-screen', className='', children=
     [
-        html.Div(className='row', children=
+        html.Div(className='row flex-display', children=
         [
-            dcc.Graph(id='source-distributions',
-                className='six columns',
-                figure=px.bar(sources,title='Data Sources')
-            ),
-            dcc.Graph(id='quantiles-accident-duration',
-                className='six columns',
-                figure=px.bar(quants,title='Quantiles of accident Duration')
-            ),
-        ]),
-        html.Div(className='row', children=
-        [
-            dcc.Graph(id='importance',
-                figure=px.pie(final,values='Impact',names='Feature',title='Feature Importance')
-            )
-
-        ]),
-        html.Div(className='nav-button-next', children=
+            html.Div(className='pretty_container six columns', children= 
             [
-                html.A('Next', href='#states-screen')
-            ]
-        )
+                dcc.Graph(id='source-distributions',
+                    figure=px.bar(sources,title='Data Sources')
+                ),
+
+            ]),
+            html.Div(className='pretty_container six columns', children=
+            [
+                dcc.Graph(id='importance',
+                    figure=px.pie(final,values='Impact',names='Feature',title='Feature Importance')
+                )
+            ]),
+        ]),
+        html.Div(className='row flex-display', children=
+        [
+            html.Div(className='pretty_container twelve columns', children= 
+            [
+                dcc.Graph(id='quantiles-accident-duration',
+                    figure=px.bar(quants,title='Quantiles of accident Duration')
+                ),
+            ]),
+        ])
+        # html.Div(className='nav-button-next', children=
+        #     [
+        #         html.A('Next', href='#states-screen')
+        #     ]
+        # )
     ]
 )

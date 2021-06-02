@@ -38,21 +38,25 @@ States_names.insert(0,'All')
 states_dict = [{'label': state, 'value': state} for state in States_names]
 
 
-layout = html.Div(id='states-screen', className='content-screen row', children=
+layout = html.Div(id='states-screen', className='row flex-display', children=
     [
-        html.H2("Number of accidents for each state"),
-        html.Div([
-            html.Div([
-                html.H3('States'),
-                dcc.Dropdown(
-                    options=states_dict,
-                    multi=True,
-                    value=["All"],
-                    id="states"
-                )  
-            ], className="six columns"),
-            
-            html.Div([
+        html.Div(className="pretty_container four columns", children=
+        [
+            html.H2("Number of accidents for each state"),
+            html.Div(
+            [
+                html.Div([
+                    html.H3('States'),
+                    dcc.Dropdown(
+                        options=states_dict,
+                        multi=True,
+                        value=["All"],
+                        id="states"
+                    )  
+                ]),
+            ]),
+            html.Div(
+            [
                 html.H3('Normalization'),
                 dcc.RadioItems(
                     options=[
@@ -62,19 +66,20 @@ layout = html.Div(id='states-screen', className='content-screen row', children=
                     value='per million people',
                     id='normalization'
                     )  
-            ], className="six columns"),
-        
-        
-    ], className="container"),
-
-    dcc.Graph(id="graph",style={"height": 500}),
-    html.Div(className='nav-button-next', children=
+            ]),
+        ]),
+        html.Div(className="pretty_container eight columns", children=
         [
-            html.A('Next', href='#conditions-screen')
-        ]
-    )
-    
-])
+            dcc.Graph(id="graph",style={"height": 500}),
+        ])
+    ]
+
+    # html.Div(className='nav-button-next', children=
+    #     [
+    #         html.A('Next', href='#conditions-screen')
+    #     ]
+    # )
+)
 
 
 @app.callback(Output("graph", "figure"), 

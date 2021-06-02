@@ -18,7 +18,7 @@ from plotly.subplots import make_subplots
 
 from app import app
 
-comparisons_df = pd.read_csv("comparisons.csv")
+comparisons_df = pd.read_csv("../data/comparisons.csv")
 
 thres_category = {'Pressure':{'thresolds':[29.5,30.2],
                               'category':['Low','Moderate','High']},
@@ -55,73 +55,87 @@ States_names.insert(0,'All')
 states_dict = [{'label': state, 'value': state} for state in States_names]
 
 
-layout = html.Div([
-    html.H2("Comparisons"),
-    html.Div([
-        html.Div([
-            html.H3('States'),
-            dcc.Dropdown(
-                options=states_dict,
-                multi=False,
-                value="All",
-                id="states"
-            )  
-        ], className="six columns"),
+layout = html.Div(className='', children= 
+    [
+        html.Div(className='row flex-display', children=[
+            html.Div(className="pretty_container twelve columns", children= 
+            [
+                dcc.Graph(id="graph-comparison",style={"height": 500}),
+            ]),
+        ]),
+        html.Div(className='row flex-display', children=
+        [
+            html.Div(className='pretty_container twelve columns', children=
+                [
+                    # html.H2("Comparisons"),
+                    html.Div(className='two columns', children=
+                        [
+                            html.Div(
+                                [
+                                    html.H3('States'),
+                                    dcc.Dropdown(
+                                        options=states_dict,
+                                        multi=False,
+                                        value="All",
+                                        id="states-comparison"
+                                    )
+                                ]
+                            ),
+                            html.Div(
+                                [
+                                    html.H3('Feature 1'),
+                                    dcc.Dropdown(
+                                        options=features_dict,
+                                        multi=False,
+                                        value="Severity",
+                                        id="feature1"
+                                    ),
+                                ]
+                            ),
+                            html.Div(
+                                [
+                                    html.H3('Feature 2'),
+                                    dcc.Dropdown(
+                                        options=features_dict,
+                                        multi=False,
+                                        value="TrafficStuckTime",
+                                        id="feature2"
+                                    )
+                                ]
+                            )
 
-        html.Div([
-            # html.H3('Normalization'),
-            html.Div([
-                html.H3('Feature 1'),
-                dcc.Dropdown(
-                    options=features_dict,
-                    multi=False,
-                    value="Severity",
-                    id="feature1"
-                ) , ]),
-            html.Div([
-                html.H3('Feature 2'),
-                dcc.Dropdown(
-                    options=features_dict,
-                    multi=False,
-                    value="TrafficStuckTime",
-                    id="feature2"
-                )  ])
-            
-
-        ],className="six columns"),
-        
-        
-        
-        
-    ], className="container"),
-
-    
-    
-    dcc.Graph(id="graph",style={"height": 500}),
-    
-
-    html.Div(children=[dcc.Slider(
-        min=2016,
-        max=2019,
-        step=1,
-        marks={
-            2016: '2016',
-            2017: '2017',
-            2018: '2018',
-            2019: '2019'
-        },
-        value=2016,
-        id='Year')],style={'width': '70%', 'padding-left': '15%','padding-right': '15%' } 
-        )
+                        ]
+                    ),
+                    html.Div(className='ten columns', children=
+                        [
+                            dcc.Slider(
+                                min=2016,
+                                max=2019,
+                                step=1,
+                                marks={
+                                    2016: '2016',
+                                    2017: '2017',
+                                    2018: '2018',
+                                    2019: '2019'
+                                },
+                                value=2016,
+                                id='Year-comparison')
+                        ],
+                        # style={'width': '70%' } 
+                    )
+            ])
+    ]),
     
 ])
 
-# 'width':800,'margin-left': '5px' 'display': 'flex', , 'justify-content': 'center' 'align-items': 'center'
-@app.callback(Output("graph", "figure"), 
-                       [Input('states', 'value'),
-                        Input('Year','value'),
+@app.callback(Output("graph-comparison", "figure"), 
+                    [
+                        Input('states-comparison', 'value'),
+                        Input('Year-comparison','value'),
                         Input('feature1','value'),
-                        Input('feature2','value')])
+                        Input('feature2','value')
+                    ]
+                )
 def update_graphs(State,year,feature1,feature2):
     
     if not State:

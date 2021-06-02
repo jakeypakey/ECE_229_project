@@ -18,14 +18,15 @@ directions_client = DirectionsClient()
 mapbox_access_token = config['MAPBOX_KEY']
 latInitial = 32.880056457383546
 lonInitial =-117.23403033597369
+mapboxStyle = 'basic'
 
 # dataset loading
 us_cities = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/us-cities-top-1k.csv")
 
 # screen layout
-layout = html.Div(id='map-screen', className='row content-screen routes', children=
+layout = html.Div(id='map-screen', className='row flex-display', children=
     [
-        html.Div(className="four columns div-user-controls", children=[
+        html.Div(className="pretty_container four columns div-user-controls", children=[
             html.Div(
                 className="div-for-dropdown",
                 children=[
@@ -37,7 +38,7 @@ layout = html.Div(id='map-screen', className='row content-screen routes', childr
                 ],
             )
         ]),
-        html.Div(className="eight columns div-for-charts bg-grey", children=
+        html.Div(className="pretty_container eight columns div-for-charts", children=
             [
                 dcc.Graph(id="map-graph",
                     figure=go.Figure(
@@ -57,7 +58,7 @@ layout = html.Div(id='map-screen', className='row content-screen routes', childr
                             mapbox=dict(
                                 accesstoken=mapbox_access_token,
                                 center=dict(lat=latInitial, lon=lonInitial),  # 40.7272  # -73.991251
-                                style="dark",
+                                style=mapboxStyle,
                                 bearing=0,
                                 zoom=14,
                             ),
@@ -132,7 +133,7 @@ def update_graph(routes_json):
             mapbox=dict(
                 accesstoken=mapbox_access_token,
                 center=dict(lat=latInitial, lon=lonInitial),  # 40.7272  # -73.991251
-                style="dark",
+                style=mapboxStyle,
                 bearing=0,
                 zoom=14,
             ),

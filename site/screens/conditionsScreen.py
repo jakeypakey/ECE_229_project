@@ -31,33 +31,50 @@ fig_names = ['AL', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'ID', 'IL', '
                  'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']
 fig_names2 = ['Rain', 'Clear','Fog','Snow','Cloudy','Dust', 'All Weather']
 fig_names3 = ['Day','Noon','Night', 'All Times of Day']
-fig_dropdown = html.Div([html.Div([
-    dcc.Dropdown(
-        id='fig_dropdown',
-        options=[{'label': x, 'value': x} for x in fig_names],
-        value='CA'
-    )]), html.Div([
-    dcc.Dropdown(
-        id='fig_dropdown2',
-        options=[{'label': x, 'value': x} for x in fig_names2],
-        value='All Weather'
-    )]), html.Div([
-    dcc.Dropdown(
-        id='fig_dropdown3',
-        options=[{'label': x, 'value': x} for x in fig_names3],
-        value='All Times of Day'
-    )]) ]) #new
 
-fig_plot = html.Div(id='fig_plot')
-layout = html.Div(id='conditions-screen', className='content-screen row', children=
+layout = html.Div(id='conditions-screen', className='row flex-display', children=
     [
-        fig_dropdown, 
-        fig_plot,
-        html.Div(className='nav-button-next', children=
+        html.Div(className='pretty_container eight columns', children=
             [
-                html.A('Next', href='#map-screen')
+                html.Div(id='fig_plot'),
             ]
-        )
+        ),
+        html.Div(className='pretty_container four columns', children=
+            [
+                html.Div(
+                    [
+                        dcc.Dropdown(
+                            id='fig_dropdown',
+                            options=[{'label': x, 'value': x} for x in fig_names],
+                            value='CA'
+                        )
+                    ]
+                ), 
+                html.Div(
+                    [
+                        dcc.Dropdown(
+                            id='fig_dropdown2',
+                            options=[{'label': x, 'value': x} for x in fig_names2],
+                            value='All Weather'
+                        )
+                    ]
+                ), 
+                html.Div(
+                    [
+                        dcc.Dropdown(
+                            id='fig_dropdown3',
+                            options=[{'label': x, 'value': x} for x in fig_names3],
+                            value='All Times of Day'
+                        )
+                    ]
+                ) 
+            ]
+        ),
+        # html.Div(className='nav-button-next', children=
+        #     [
+        #         html.A('Next', href='#map-screen')
+        #     ]
+        # )
     ])
 
 
@@ -94,5 +111,5 @@ def name_to_figure(fig_name,fig_name2, fig_name3):
                     showland=True, landcolor="lightslategray",
                     showocean=True, oceancolor="LightGrey",
                     showcountries =True)
-    figure.update_layout(margin={"r":0,"t":0,"l":0,"b":0},paper_bgcolor = "#323232")
+    figure.update_layout(margin={"r":0,"t":0,"l":0,"b":0},paper_bgcolor = "#ffffff")
     return dcc.Graph(figure=figure)

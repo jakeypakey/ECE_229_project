@@ -2,18 +2,16 @@ import dash_html_components as html
 
 from app import app
 
-layout = html.Div(id='title-screen', className='row title-screen', children=
+layout = html.Div(id='title-screen', className='row center-title', children=
     [
-        html.Div(className="twelve columns", children=[
-            html.H1('''Title Screen'''),
-            html.Div([
-                html.P('''Description about our project here''')
-            ]),
+        html.Div(className="twelve columns pretty_container title-screen", children=[
+            html.H1('''US Traffic Accident Analysis'''),
+            html.P('''by Group 2''')
         ]),
-        html.Div(className='nav-button-next', children=
-            [
-                html.A('Next', href='#data-overview-screen')
-            ]
-        )
+        # html.Div(className='nav-button-next', children=
+        #     [
+        #         html.A('Next', href='#data-overview-screen')
+        #     ]
+        # )
 
     ])

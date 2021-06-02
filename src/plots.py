@@ -13,7 +13,7 @@ def plotQuantiles():
     with open('../data/quants.pkl','rb') as fi:
         quants = pd.Series(pickle.load(fi))
     return px.bar(quants,title='Quantiles of accident Duration',labels={'index':'Quantile','value':'Duration of accident (minutes)'})
-def plotImportance():
+def plotImportance(vertical=False):
     with open('../data/featureImportance.pkl','rb') as fi:
         feat = pickle.load(fi)
     values,labels = [x[1] for x in feat],[x[0] for x in feat]
@@ -28,8 +28,12 @@ def plotImportance():
             final['Impact as a Percentage'].append(v*100)
     final['Feature'].append('Others')
     final['Impact as a Percentage'].append(100*other)
-    figB = px.bar(final,title='Features impacting accident duration',x='Feature',y='Impact as a Percentage')
+    if vertical:
+        figB = px.bar(final,title='Features impacting accident duration',y='Feature',x='Impact as a Percentage',orientation='h')
+        figB.update_xaxes(ticksuffix="%", showgrid=True)
+    else:
+        figB = px.bar(final,title='Features impacting accident duration',x='Feature',y='Impact as a Percentage')
     
-    figB.update_yaxes(ticksuffix="%", showgrid=True)
+        figB.update_yaxes(ticksuffix="%", showgrid=True)
     return figB
 

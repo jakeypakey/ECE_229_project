@@ -4,7 +4,7 @@ from dash.dependencies import Input, Output
 from dotenv import dotenv_values
 config = dotenv_values('.env')
 
-from app import app
+from app import app, server
 from screens import titleScreen, statesScreen, conditionsScreen, mapScreen
 
 app.layout = html.Div(id='page-content', children=
@@ -16,4 +16,9 @@ app.layout = html.Div(id='page-content', children=
 ])
 
 if __name__ == '__main__':
+    # to run dev server
+    # python index.py
     app.run_server(debug=True)
+
+# to start production server
+# gunicorn index:server -b :8000

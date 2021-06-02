@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Jun  1 22:55:23 2021
+Created on Tue Jun  1 17:37:49 2021
 
 @author: srist
 """
+
 
 
 import numpy as np
@@ -25,9 +26,11 @@ thres_category = {'Pressure':{'thresolds':[29.5,30.2],
                   'TrafficStuckTime':{'thresolds':[35,50,70,90],
                               'category':['VeryLow','Low','Moderate','High','VeryHigh']},
                   'Temperature':{'thresolds':[0,30,60,80,100],
-                              'category':['VeryVeryLow','VeryLow','Low','Moderate','High','VeryHigh']},}
+                              'category':['VeryVeryLow','VeryLow','Low','Moderate','High','VeryHigh']}
+                  }
 
-
+thres_category['DayOfWeek'] = {'thresolds':[],
+                               'category':["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]}
 
 columns = list(comparisons_df.keys())
 features = list(comparisons_df.keys())
@@ -38,6 +41,7 @@ features_dict = [{'label': feature, 'value': feature} for feature in features]
 
 columns_mapping = {}
 for feature in features:
+    # columns_mapping[feature] = [column for column in columns if feature in column]
     if feature not in thres_category.keys():
         columns_mapping[feature] = [column for column in columns if feature in column]
     else:
@@ -55,8 +59,13 @@ States_names.insert(0,'All')
 states_dict = [{'label': state, 'value': state} for state in States_names]
 
 
+
 layout = html.Div([
     html.H2("Comparisons"),
+
+
+    # ], className="container"),
+    
     html.Div([
         html.Div([
             html.H3('States'),
@@ -137,7 +146,7 @@ def update_graphs(State,year,feature1,feature2):
             fig.add_trace(go.Bar(
                 y=df[df['Year']==year][column],
                 x=list(range(1,13)),
-                name=column,
+                name=column.replace(feature+"_",""),
                 legendgroup = str(i+1)
                 ),row=i+1, col=1)
 
@@ -154,9 +163,7 @@ def update_graphs(State,year,feature1,feature2):
                     ),
                       legend_tracegroupgap = 100,)
     
-    
-    fig.update_layout(color_discrete_sequence=px.colors.qualitative.G10)
-    
+
     return fig 
 
 

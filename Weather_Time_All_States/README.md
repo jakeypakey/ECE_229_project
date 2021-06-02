@@ -28,3 +28,4 @@ Run All_States_Plots.ipynb
 -Potential biases
   - Clear and cloudy weather occur more than other types of weather in general, so more instances of accidents should occur under those conditions even if they may happen at a higher rate under other weather conditions
   - Some counties have dramatically lower population than others. This is accounted for by normalizing by population, but doing this may overemphasize the significance of small, outlier data
+

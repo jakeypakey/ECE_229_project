@@ -6,7 +6,9 @@
 ### Weather  
 6 Weather categories - Rain, Clear, Fog, Snow, Cloudy, Dust
 ### Time of Day  
-3 Times of Day - Day Noon Night
+- Day 06:00 to 11:59
+- Noon 12:00 to 17:59
+- Night 18:00 to 05:59
 
 ### To run:  
 Run All_States_Plots.ipynb  

@@ -64,8 +64,8 @@ layout = html.Div(className='', children=
         html.Div(className='row flex-display', children=[
             html.Div(className="pretty_container twelve columns", children= 
             [
-                html.H4('Comparison of Accidents between Two Features'),
                 dcc.Graph(id="graph-comparison",style={"height": 500}),
+                html.H4('Comparison of Accidents between Two Features'),
             ]),
         ]),
         html.Div(className='', children=
@@ -111,24 +111,29 @@ layout = html.Div(className='', children=
 
                         ]
                     ),
-                    html.Div(className='row', children=
+                    html.Div(className='row', children= 
                         [
-                            dcc.Slider(
-                                min=2016,
-                                max=2019,
-                                step=1,
-                                marks={
-                                    2016: '2016',
-                                    2017: '2017',
-                                    2018: '2018',
-                                    2019: '2019'
-                                },
-                                value=2016,
-                                id='Year-comparison')
-                        ],
-                        # style={'width': '70%' } 
+                            html.Div(className='comparison-slider', children=
+                                [
+                                    dcc.Slider(
+                                        min=2016,
+                                        max=2019,
+                                        step=1,
+                                        marks={
+                                            2016: '2016',
+                                            2017: '2017',
+                                            2018: '2018',
+                                            2019: '2019'
+                                        },
+                                        value=2016,
+                                        id='Year-comparison')
+                                # style={'width': '70%' } 
+                                ]
+                            ),
+                        ]
                     )
-            ])
+                ]
+            )
     ]),
     
 ])

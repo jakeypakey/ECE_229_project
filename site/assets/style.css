@@ -99,8 +99,17 @@ html {
 
 }
 
+.text-box {
+  width: 100%
+}
+
 .mini-container {
-  width=40px;
+  margin: 20px auto;
+  width: 25%;
+}
+
+.comparison-slider {
+  margin:5px 0;
 }
 
 .pretty_container {
@@ -358,6 +367,8 @@ a:hover {
   border: 1px solid #bbb;
   cursor: pointer;
   box-sizing: border-box;
+  margin: 0 auto;
+  width: 100%;
 }
 .button:hover, button:hover, input[type="submit"]:hover, input[type="reset"]:hover, input[type="button"]:hover, .button:focus, button:focus, input[type="submit"]:focus, input[type="reset"]:focus, input[type="button"]:focus {
   color: #333;

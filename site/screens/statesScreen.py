@@ -15,7 +15,7 @@ from dash.dependencies import Input, Output
 
 from app import app
 
-accidents = pd.read_csv("accidents_visualization.csv")
+accidents = pd.read_csv("data/accidents_visualization.csv")
 
 num_frames = len(accidents['year_month'].unique())
 fig = px.choropleth(accidents,               

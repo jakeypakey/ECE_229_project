@@ -19,14 +19,14 @@ from plotly.subplots import make_subplots
 
 from app import app
 
-comparisons_df = pd.read_csv("comparisons_impute.csv")
+comparisons_df = pd.read_csv("data/comparisons_impute.csv")
 
 comparisons_df = comparisons_df.rename(columns={'Severity_1.0':'Severity_1',
  'Severity_2.0':'Severity_2',
  'Severity_3.0':'Severity_3',
  'Severity_4.0':'Severity_4'})
 
-comparisons_df_normalize = pd.read_csv("comparisons_impute_normalize.csv")
+comparisons_df_normalize = pd.read_csv("data/comparisons_impute_normalize.csv")
 comparisons_df_normalize = comparisons_df_normalize.rename(columns={'Severity_1.0':'Severity_1',
  'Severity_2.0':'Severity_2',
  'Severity_3.0':'Severity_3',
@@ -130,7 +130,7 @@ layout = html.Div([
                     options=states_dict,
                     multi=False,
                     value="All",
-                    id="states"
+                    id="states-comparison"
                 ) , ]),
             html.Div([
                 html.H3('y-axis'),
@@ -140,7 +140,7 @@ layout = html.Div([
                     {'label': 'percentage', 'value': 'percentage'}
                 ],
                 value='#Accidents',
-                id='normalization'
+                id='normalization-comparison'
                 )  
                 ]) ]),
         
@@ -191,7 +191,7 @@ layout = html.Div([
 
     
     
-    dcc.Graph(id="graph",style={"height": 500}),
+    dcc.Graph(id="graph-comparison",style={"height": 500}),
     
 
     html.Div(children=[dcc.Slider(
@@ -211,12 +211,12 @@ layout = html.Div([
 ])
 
 # 'width':800,'margin-left': '5px' 'display': 'flex', , 'justify-content': 'center' 'align-items': 'center'
-@app.callback(Output("graph", "figure"), 
-                       [Input('states', 'value'),
+@app.callback(Output("graph-comparison", "figure"), 
+                       [Input('states-comparison', 'value'),
                         Input('Year','value'),
                         Input('feature1','value'),
                         Input('feature2','value'),
-                        Input('normalization','value')])
+                        Input('normalization-comparison','value')])
 def update_graphs(State,year,feature1,feature2,normalization):
     
     if not State:

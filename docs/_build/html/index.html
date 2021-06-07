@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to ECE229_Project’s documentation! &#8212; ECE229_Project June 11, 2021 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="welcome-to-ece229-project-s-documentation">
+<h1>Welcome to ECE229_Project’s documentation!<a class="headerlink" href="#welcome-to-ece229-project-s-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<dl class="py class">
+<dt id="src.accidentDelay.AccidentDelay">
+<em class="property">class </em><code class="sig-prename descclassname">src.accidentDelay.</code><code class="sig-name descname">AccidentDelay</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">modelFile</span><span class="o">=</span><span class="default_value">'../data/trainedModelNationwide.pkl'</span></em>, <em class="sig-param"><span class="n">apiKeyFile</span><span class="o">=</span><span class="default_value">'../data/key.pkl'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.accidentDelay.AccidentDelay" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class wraps a model which provides an esitmate of the time delay
+given an accident occured at a given location</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<em>string</em>) – the model</p></li>
+<li><p><strong>key</strong> – openweather api key</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="src.accidentDelay.AccidentDelay.distance">
+<code class="sig-name descname">distance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">y</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.accidentDelay.AccidentDelay.distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>calculates the distance between x,y in kilometers
+using the Haversine formula:
+<a class="reference external" href="https://en.wikipedia.org/wiki/Haversine_formula">https://en.wikipedia.org/wiki/Haversine_formula</a></p>
+<p>:param x : lat,lng in degrees
+:param y : lat,lng in degrees
+:raises TypeError: points not input
+:return: distnace in kilometers
+:rtype: float</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.accidentDelay.AccidentDelay.generateExample">
+<code class="sig-name descname">generateExample</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lat</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lng</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">weatherDict</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.accidentDelay.AccidentDelay.generateExample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse and transform weather dictionary from getWeather
+and use the information to create an example for inference</p>
+<p>:param weatherDict : dictionary with raw json
+:raises TypeError: when non dict passed to dict arg
+ValueError: when lat,lng disagrees with dict
+:return: JSON with relevant weather data
+:rtype: JSON object</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.accidentDelay.AccidentDelay.getWeather">
+<code class="sig-name descname">getWeather</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lat</span><span class="o">=</span><span class="default_value">32.8800806</span></em>, <em class="sig-param"><span class="n">lng</span><span class="o">=</span><span class="default_value">- 117.237558</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.accidentDelay.AccidentDelay.getWeather" title="Permalink to this definition">¶</a></dt>
+<dd><p>fetches weather parameters for the provided latitude and longitude
+more info at <a class="reference external" href="https://openweathermap.org/current">https://openweathermap.org/current</a></p>
+<p>:param lat : latitude, defaults to Geisel Library latitude 
+:param lng : longitude, defaults to Geisel Library longitude 
+:raises ValueError: when invalid lat lng passed
+TypeError: when non float input
+:return: JSON with relevant weather data
+:rtype: JSON object</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.accidentDelay.AccidentDelay.orderRoutes">
+<code class="sig-name descname">orderRoutes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">routeJSON</span></em>, <em class="sig-param"><span class="n">getAll</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.accidentDelay.AccidentDelay.orderRoutes" title="Permalink to this definition">¶</a></dt>
+<dd><p>rates the routes accident time score
+:param routeJSON : raw json from googlemaps</p>
+<p>:param getAll : true if all points and values desired
+:raises TypeError: when non dictionary input
+:return: values pertaining to time rating
+in the order that the routes were ordered inside the routeJSON
+:rtype: list of floats, and values if desired</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.accidentDelay.AccidentDelay.rateRoute">
+<code class="sig-name descname">rateRoute</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">routeDict</span></em>, <em class="sig-param"><span class="n">getAll</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.accidentDelay.AccidentDelay.rateRoute" title="Permalink to this definition">¶</a></dt>
+<dd><p>provides a rating of the time of an accident given
+one occurs along the route on the route specified</p>
+<p>:param routeDict : the route as a dict
+:param model : sklearn model for inference
+:param getAll : returns all sample points, along with normalized scores
+:raises TypeError: when non dictionary input
+:return: value pertaining to time rating and all scored points if desired
+:rtype: (scores,allPoints)</p>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-src.cleaning"></span><dl class="py function">
+<dt id="src.cleaning.getPandasNumeric">
+<code class="sig-prename descclassname">src.cleaning.</code><code class="sig-name descname">getPandasNumeric</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span></em>, <em class="sig-param"><span class="n">box</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.cleaning.getPandasNumeric" title="Permalink to this definition">¶</a></dt>
+<dd><p>cleans raw data and transforms features such that
+regression can be performed
+:param df : DataFrame
+:param  box: bounding box, if points are to be limited
+to a single area
+:raises TypeError: non dataframe input
+:return: cleaned DataFrame
+:rtype: pd.DataFrame</p>
+</dd></dl>
+
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">ECE229_Project</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Aaron Luo, Dyuthi Sristi, Gates Zheng, Jacob Pollard, Steven Wong, Yejun Li.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

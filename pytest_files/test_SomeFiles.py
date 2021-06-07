@@ -26,10 +26,10 @@ def PytestFileAdder(filename,exclude = ['__init__']):
                 package_name.append(f)
                 sys.path.insert(1, root)
     return package_name
-file = '/workspace/ECE_229_project/site/utils/'
+file = '/workspace/ECE_229_project/site/'
 PytestFileAdder(file)
 from DirectionsUtil import *
-from .plots import *
+from plots import *
 import plotly.express as px
 import plotly
 

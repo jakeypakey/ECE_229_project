@@ -91,12 +91,25 @@ html {
   border-radius: 5px;
   /* background-color: #f9f9f9; */
   background-color: #fff;
-  margin: 20% 10px;
+  margin: 20px 10px;
   padding: 10px;
   position: relative;
   border-style: solid;
   box-shadow: 2px 2px 2px lightgray;
 
+}
+
+.text-box {
+  width: 100%
+}
+
+.mini-container {
+  /* margin: 20px auto; */
+  width: 20%;
+}
+
+.comparison-slider {
+  margin:5px 0;
 }
 
 .pretty_container {
@@ -324,15 +337,15 @@ a:hover {
 
 
 .main-svg{
-  font-family: "Open Sans Semi Bold"
+  font-family: "Helvetica";
 }
 
 .gtitle{
-  font-family: "Open Sans Semi Bold" !important
+  font-family: "Helvetica" !important
 }
 
 .g-title{
-  font-family: "Open Sans Semi Bold"
+  font-family: "Helvetica";
 }
 
 
@@ -354,6 +367,8 @@ a:hover {
   border: 1px solid #bbb;
   cursor: pointer;
   box-sizing: border-box;
+  margin: 0 auto;
+  width: 100%;
 }
 .button:hover, button:hover, input[type="submit"]:hover, input[type="reset"]:hover, input[type="button"]:hover, .button:focus, button:focus, input[type="submit"]:focus, input[type="reset"]:focus, input[type="button"]:focus {
   color: #333;
@@ -602,13 +617,13 @@ a {
 }
 
 .Select-control{
-  border: 0.5px solid #dbdbdb44;
+  border: 0.5px solid #00000044;
 }
 
 .has-value.Select--single>.Select-control .Select-value .Select-value-label, .has-value.is-pseudo-focused.Select--single>.Select-control .Select-value .Select-value-label {
-  color: white;
-  background: #1E1E1E;
-  background-color: #1E1E1E;
+  color: rgb(0, 0, 0);
+  background: #ffffff;
+  background-color: #ffffff;
 }
 ._dash-app-content {
   overflow-x: hidden;
@@ -616,18 +631,18 @@ a {
   position: relative;
 }
 .has-value.Select--single>.Select-control .Select-value .Select-value-label, .has-value.is-pseudo-focused.Select--single>.Select-control .Select-value .Select-value-labeln {
-  color: #d8d8d8;
+  color: #000000;
   font-weight: 400;
   font-size: 14px;
 }
 
 .Input.DateInput_1 {
-  background-color: #1e1e1e;
+  background-color: #ffffff;
 }
 
 #date {
   background-color: #1e1e1e;
-  font-family: "Open Sans Light";
+  font-family: "Helvetica";
   font-weight: 400;
   color: #dbdbdb;
   border: 0.5px solid #dbdbdb44;

@@ -36,7 +36,7 @@ layout = html.Div(id='map-screen', className='row flex-display map-row', childre
                             html.H5('Starting Location', 
                                 className='center'),
                             html.Div(dcc.Input(id='input-starting-location', 
-                                className='',
+                                className='text-box',
                                 type='text')),
 
                         ]
@@ -46,11 +46,11 @@ layout = html.Div(id='map-screen', className='row flex-display map-row', childre
                             html.H5('Ending Location', 
                                 className='center'),
                             html.Div(dcc.Input(id='input-ending-location', 
-                                className='',
+                                className='text-box',
                                 type='text')),
                         ]
                     ),
-                    html.Button('Submit', id='btn-submit', n_clicks=0),
+                    html.Button('Submit', className='button', id='btn-submit', n_clicks=0),
                     html.P(id='submit-text', children='')
                 ],
             )

@@ -36,42 +36,48 @@ States_names.sort()
 States_names.insert(0,'All')
 states_dict = [{'label': state, 'value': state} for state in States_names]
 
-layout = html.Div([
-    html.H2("Number of accidents for each state"),
-    html.Div([
-        html.Div([
-            html.H3('States'),
-            dcc.Dropdown(
-                options=states_dict,
-                multi=True,
-                value=["All"],
-                id="states"
-            )  
-        ], className="six columns"),
+layout = html.Div(id='states-screen', className='row flex-display', children=
+    [
+        html.Div(className="pretty_container four columns", children=
+        [
+            html.H4("Number of accidents for each state"),
+            html.Div(className='input-field', children=
+            [
+                html.Div([
+                    html.H5('States'),
+                    dcc.Dropdown(
+                        options=states_dict,
+                        multi=True,
+                        value=["All"],
+                        id="states"
+                    )  
+                ]),
+            ]),
+            html.Div( className='input-field', children=
+            [
+                html.H5('Normalization'),
+                dcc.RadioItems(
+                    options=[
+                        {'label': 'without Normalization', 'value': 'without Normalization'},
+                        {'label': 'per million people', 'value': 'per million people'}
+                    ],
+                    value='per million people',
+                    id='normalization'
+                    )  
+            ]),
+        ]),
+        html.Div(className="pretty_container eight columns", children=
+        [
+            dcc.Graph(id="graph",style={"height": 500}),
+        ])
+    ]
 
-
-        html.Div([
-            html.H3('Normalization'),
-            dcc.RadioItems(
-                options=[
-                    {'label': '#Accidents', 'value': 'without Normalization'},
-                    {'label': '#Accident per million', 'value': 'per million people'}
-                ],
-                value='per million people',
-                id='normalization'
-                )  
-        ], className="six columns"),
-        
-        
-        
-        
-    ], className="container"),
-    
-    dcc.Graph(id="graph",style={"height": 500})
-    
-])
-
-
+    # html.Div(className='nav-button-next', children=
+    #     [
+    #         html.A('Next', href='#conditions-screen')
+    #     ]
+    # )
+)
 
 
 @app.callback(Output("graph", "figure"), 

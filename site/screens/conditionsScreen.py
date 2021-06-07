@@ -41,8 +41,10 @@ layout = html.Div(id='conditions-screen', className='row flex-display', children
         ),
         html.Div(className='pretty_container four columns', children=
             [
-                html.Div(
+                html.H4('Accidents by Weather Condition'),
+                html.Div(className='input-field', children=
                     [
+                        html.H5('States'),
                         dcc.Dropdown(
                             id='fig_dropdown',
                             options=[{'label': x, 'value': x} for x in fig_names],
@@ -50,8 +52,9 @@ layout = html.Div(id='conditions-screen', className='row flex-display', children
                         )
                     ]
                 ), 
-                html.Div(
+                html.Div(className='input-field', children=
                     [
+                        html.H5('Weather'),
                         dcc.Dropdown(
                             id='fig_dropdown2',
                             options=[{'label': x, 'value': x} for x in fig_names2],
@@ -59,8 +62,9 @@ layout = html.Div(id='conditions-screen', className='row flex-display', children
                         )
                     ]
                 ), 
-                html.Div(
+                html.Div(className='input-field', children=
                     [
+                        html.H5('Time of Day'),
                         dcc.Dropdown(
                             id='fig_dropdown3',
                             options=[{'label': x, 'value': x} for x in fig_names3],

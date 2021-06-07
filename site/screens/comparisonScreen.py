@@ -102,118 +102,100 @@ States_names.insert(0,'All')
 states_dict = [{'label': state, 'value': state} for state in States_names]
 
 
-# external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-# app = dash.Dash(__name__, external_stylesheets=external_stylesheets) 
+layout = html.Div(className='', children= 
+    [
+        html.Div(className='row flex-display', children=[
+            html.Div(className="pretty_container twelve columns", children= 
+            [
+                dcc.Graph(id="graph-comparison",style={"height": 500}),
+                html.H4('Comparison of Accidents between Two Features'),
+            ]),
+        ]),
+        html.Div(className='', children=
+        [
+            html.Div(className='pretty_container', children=
+                [
+                    # html.H2("Comparisons"),
+                    html.Div(className='row flex-display', children=
+                        [
+                            html.Div(className='input-field mini-container', children=
+                                [
+                                    html.H5('States'),
+                                    dcc.Dropdown(
+                                        options=states_dict,
+                                        multi=False,
+                                        value="All",
+                                        id="states-comparison"
+                                    )
+                                ]
+                            ),
+                            html.Div(className='input-field mini-container', children=[
+                                html.H5('Y-Axis'),
+                                dcc.RadioItems(
+                                    options=[
+                                        {'label': '#Accidents', 'value': '#Accidents'},
+                                        {'label': 'percentage', 'value': 'percentage'}
+                                    ],
+                                    value='#Accidents',
+                                    id='normalization-comparison'
+                                )  
+                            ]),
+                            html.Div(className='input-field mini-container', children=
+                                [
+                                    html.H5('Feature 1'),
+                                    dcc.Dropdown(
+                                        options=features_dict,
+                                        multi=False,
+                                        value="Severity",
+                                        id="feature1"
+                                    ),
+                                ]
+                            ),
+                            html.Div(className='input-field mini-container', children=
+                                [
+                                    html.H5('Feature 2'),
+                                    dcc.Dropdown(
+                                        options=features_dict,
+                                        multi=False,
+                                        value="AccidentDuration",
+                                        id="feature2"
+                                    )
+                                ]
+                            )
 
-layout = html.Div([
-    html.H2("Comparisons"),
-
-
-    # ], className="container"),
-    
-    html.Div([
-        # html.Div([
-        #     html.H3('States'),
-        #     dcc.Dropdown(
-        #         options=states_dict,
-        #         multi=False,
-        #         value="All",
-        #         id="states"
-        #     )  
-        # ], className="six columns"),
-        
-        html.Div([
-            # html.H3('Normalization'),
-            html.Div([
-                html.H3('States'),
-                dcc.Dropdown(
-                    options=states_dict,
-                    multi=False,
-                    value="All",
-                    id="states-comparison"
-                ) , ]),
-            html.Div([
-                html.H3('y-axis'),
-                dcc.RadioItems(
-                options=[
-                    {'label': '#Accidents', 'value': '#Accidents'},
-                    {'label': 'percentage', 'value': 'percentage'}
-                ],
-                value='#Accidents',
-                id='normalization-comparison'
-                )  
-                ]) ]),
-        
-        # html.Div([
-        #     html.H3('Date'),
-        #     dcc.RangeSlider(
-        #                     id='rangeslider',
-        #                     min=0,
-        #                     max=accidents['year_month'].nunique()-1,
-        #                     value=[0, accidents['year_month'].nunique()-1],
-        #                     allowCross=False
-        #                     )
-        # ], className="six columns"),
-        
-        html.Div([
-            # html.H3('Normalization'),
-            html.Div([
-                html.H3('Feature 1'),
-                dcc.Dropdown(
-                    options=features_dict,
-                    multi=False,
-                    value="Severity",
-                    id="feature1"
-                ) , ]),
-            html.Div([
-                html.H3('Feature 2'),
-                dcc.Dropdown(
-                    options=features_dict,
-                    multi=False,
-                    value="AccidentDuration",
-                    id="feature2"
-                )  ])
-            
-            # dcc.RadioItems(
-            #     options=[
-            #         {'label': 'without Normalization', 'value': 'without Normalization'},
-            #         {'label': 'per million people', 'value': 'per million people'}
-            #     ],
-            #     value='per million people',
-            #     id='normalization'
-            #     )  
-        ],className="six columns"),
-        
-        
-        
-        
-    ], className="container"),
-
-    
-    
-    dcc.Graph(id="graph-comparison",style={"height": 500}),
-    
-
-    html.Div(children=[dcc.Slider(
-        min=2016,
-        max=2019,
-        step=1,
-        marks={
-            2016: '2016',
-            2017: '2017',
-            2018: '2018',
-            2019: '2019'
-        },
-        value=2016,
-        id='Year')],style={'width': '70%', 'padding-left': '15%','padding-right': '15%' } 
-        )
+                        ]
+                    ),
+                    html.Div(className='row', children= 
+                        [
+                            html.Div(className='comparison-slider', children=
+                                [
+                                    dcc.Slider(
+                                        min=2016,
+                                        max=2019,
+                                        step=1,
+                                        marks={
+                                            2016: '2016',
+                                            2017: '2017',
+                                            2018: '2018',
+                                            2019: '2019'
+                                        },
+                                        value=2016,
+                                        id='Year-comparison')
+                                # style={'width': '70%' } 
+                                ]
+                            ),
+                        ]
+                    )
+                ]
+            )
+    ]),
     
 ])
 
 # 'width':800,'margin-left': '5px' 'display': 'flex', , 'justify-content': 'center' 'align-items': 'center'
 @app.callback(Output("graph-comparison", "figure"), 
                        [Input('states-comparison', 'value'),
-                        Input('Year','value'),
+                        Input('Year-comparison','value'),
                         Input('feature1','value'),
                         Input('feature2','value'),
                         Input('normalization-comparison','value')])

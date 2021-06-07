@@ -9,9 +9,9 @@ Welcome to ECE229_Project's documentation!
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
-.. autoclass:: src.accidentDelay::AccidentDelay
+.. autoclass:: site.utils.accidentDelay::AccidentDelay
    :members:
-.. automodule:: src.cleaning
+.. automodule:: site.utils.cleaning
    :members:
 
 

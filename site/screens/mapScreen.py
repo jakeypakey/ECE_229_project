@@ -11,8 +11,8 @@ from dash.exceptions import PreventUpdate
 import json
 
 from app import app
-from utils.DirectionsUtil import DirectionsClient
-from src.accidentDelay import AccidentDelay
+from utils.directionsClient import DirectionsClient
+from utils.accidentDelay import AccidentDelay
 
 # intialization
 directions_client = DirectionsClient()

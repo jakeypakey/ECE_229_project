@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Jun  1 20:04:18 2021
+Created on Sun May 30 22:28:14 2021
 
 @author: srist
 """
@@ -15,7 +15,6 @@ from dash.dependencies import Input, Output
 
 from app import app
 
-# load dataset
 accidents = pd.read_csv("data/accidents_visualization.csv")
 
 num_frames = len(accidents['year_month'].unique())
@@ -37,16 +36,15 @@ States_names.sort()
 States_names.insert(0,'All')
 states_dict = [{'label': state, 'value': state} for state in States_names]
 
-
 layout = html.Div(id='states-screen', className='row flex-display', children=
     [
         html.Div(className="pretty_container four columns", children=
         [
-            html.H2("Number of accidents for each state"),
-            html.Div(
+            html.H4("Number of accidents for each state"),
+            html.Div(className='input-field', children=
             [
                 html.Div([
-                    html.H3('States'),
+                    html.H5('States'),
                     dcc.Dropdown(
                         options=states_dict,
                         multi=True,
@@ -55,9 +53,9 @@ layout = html.Div(id='states-screen', className='row flex-display', children=
                     )  
                 ]),
             ]),
-            html.Div(
+            html.Div( className='input-field', children=
             [
-                html.H3('Normalization'),
+                html.H5('Normalization'),
                 dcc.RadioItems(
                     options=[
                         {'label': 'without Normalization', 'value': 'without Normalization'},
@@ -89,18 +87,20 @@ def update_graphs(states,normalization):
     
     if not states:
         states = ["All"]
+        
+
 
     if 'All' in states:
         
         df = accidents
     else:
         df = accidents[accidents['State'].isin(states)]
-        
     if normalization=='without Normalization':
         color_column  = "counts"
         color_range = (0, 10000)
     elif normalization=='per million people':
         color_column  = "counts per million"
+        
         if 'All' in states:
             color_range = (0, 60)
         else:
@@ -125,6 +125,7 @@ def update_graphs(states,normalization):
                         # category_orders = {'frames':list(range(1,num_frames+1))},
                         )
     fig.update_layout(geo_scope="usa")
-
-    return fig 
     
+
+    
+    return fig 

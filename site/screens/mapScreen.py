@@ -24,16 +24,33 @@ mapboxStyle = 'basic'
 us_cities = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/us-cities-top-1k.csv")
 
 # screen layout
-layout = html.Div(id='map-screen', className='row flex-display', children=
+layout = html.Div(id='map-screen', className='row flex-display map-row', children=
     [
         html.Div(className="pretty_container four columns div-user-controls", children=[
             html.Div(
                 className="div-for-dropdown",
                 children=[
-                    html.H1('Directions with Accident-Avoidance'),
-                    html.Div(dcc.Input(id='input-starting-location', type='text')),
-                    html.Div(dcc.Input(id='input-ending-location', type='text')),
-                    html.Button('Submit', id='btn-submit', n_clicks=0),
+                    html.H3('Directions with Accident-Avoidance'),
+                    html.Div(className='input-field', children=
+                        [
+                            html.H5('Starting Location', 
+                                className='center'),
+                            html.Div(dcc.Input(id='input-starting-location', 
+                                className='text-box',
+                                type='text')),
+
+                        ]
+                    ),
+                    html.Div(className='input-field', children=
+                        [
+                            html.H5('Ending Location', 
+                                className='center'),
+                            html.Div(dcc.Input(id='input-ending-location', 
+                                className='text-box',
+                                type='text')),
+                        ]
+                    ),
+                    html.Button('Submit', className='button', id='btn-submit', n_clicks=0),
                     html.P(id='submit-text', children='')
                 ],
             )

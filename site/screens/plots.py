@@ -8,11 +8,13 @@ def plotSources():
         sources = pickle.load(fi)
     final = {'Source':list(sources.keys()),'Count':list(sources.values())}
     #return final
-    return px.pie(final,title='Data sources',names='Source',values='Count')
+    return px.pie(final,names='Source',values='Count')
+
 def plotQuantiles():
     with open('../data/quants.pkl','rb') as fi:
         quants = pd.Series(pickle.load(fi))
-    return px.bar(quants,title='Quantiles of accident Duration',labels={'index':'Quantile','value':'Duration of accident (minutes)'})
+    return px.bar(quants,labels={'index':'Quantile','value':'Duration of accident (minutes)'})
+
 def plotImportance(vertical=False):
     with open('../data/featureImportance.pkl','rb') as fi:
         feat = pickle.load(fi)
@@ -29,10 +31,10 @@ def plotImportance(vertical=False):
     final['Feature'].append('Others')
     final['Impact as a Percentage'].append(100*other)
     if vertical:
-        figB = px.bar(final,title='Features impacting accident duration',y='Feature',x='Impact as a Percentage',orientation='h')
+        figB = px.bar(final,y='Feature',x='Impact as a Percentage',orientation='h')
         figB.update_xaxes(ticksuffix="%", showgrid=True)
     else:
-        figB = px.bar(final,title='Features impacting accident duration',x='Feature',y='Impact as a Percentage')
+        figB = px.bar(final,x='Feature',y='Impact as a Percentage')
     
         figB.update_yaxes(ticksuffix="%", showgrid=True)
     return figB

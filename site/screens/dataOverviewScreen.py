@@ -24,6 +24,7 @@ layout = html.Div(id='data-overview-screen', className='', children=
         [
             html.Div(className='pretty_container six columns', children= 
             [
+                html.H4('Data Sources'),
                 dcc.Graph(id='source-distributions',
                     figure=plotSources()
                 ),
@@ -31,8 +32,9 @@ layout = html.Div(id='data-overview-screen', className='', children=
             ]),
             html.Div(className='pretty_container six columns', children=
             [
+                html.H4('Features Impacting Accident Duration'),
                 dcc.Graph(id='importance',
-                    figure=plotImportance(vertical=True)
+                    figure=plotImportance()
                 )
             ]),
         ]),
@@ -40,6 +42,7 @@ layout = html.Div(id='data-overview-screen', className='', children=
         [
             html.Div(className='pretty_container twelve columns', children= 
             [
+                html.H4('Distribution of Accident Duration'),
                 dcc.Graph(id='quantiles-accident-duration',
                     figure=plotQuantiles()
                 ),

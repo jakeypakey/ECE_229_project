@@ -12,6 +12,7 @@ import json
 
 from app import app
 from utils.DirectionsUtil import DirectionsClient
+from src.accidentDelay import AccidentDelay
 
 # intialization
 directions_client = DirectionsClient()
@@ -20,9 +21,8 @@ latInitial = 32.880056457383546
 lonInitial =-117.23403033597369
 mapboxStyle = 'basic'
 
-# dataset loading
+# dataset/model loading
 us_cities = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/us-cities-top-1k.csv")
-
 # screen layout
 layout = html.Div(id='map-screen', className='row flex-display map-row', children=
     [
@@ -104,6 +104,13 @@ def update_map(nclicks, start, end):
     if nclicks == 0 or not start or not end:
         raise PreventUpdate
     routes = directions_client.get_directions_json(start, end)
+    print('loading accident model', dt.now())
+    accident_delay = AccidentDelay(modelFile='data/trainedModelNationwide.pkl', apiKeyFile='data/key.pkl')
+    print('finished loading accident model', dt.now())
+    accident_ordering = accident_delay.orderRoutes(routes)
+    print('querying results')
+    routes = [x for _, x in sorted(zip(accident_ordering, routes['routes']))]
+
     return json.dumps(routes)
 
 @app.callback(
@@ -113,10 +120,9 @@ def update_map(nclicks, start, end):
     ]
 )
 def update_graph(routes_json):
+    route_colors = ['#f1a208', '#005377', '#052f5f']
     routes = json.loads(routes_json)
     route_geojson = [directions_client.get_geojson_from_route(r) for r in routes]
-    route_colors = ['#f1a208', '#005377', '#052f5f']
-    print('mapview updated')
 
     latInitial = 32.880056457383546
     lonInitial =-117.23403033597369
@@ -140,6 +146,7 @@ def update_graph(routes_json):
             ) for i,route_coords in enumerate(route_geojson)
         ]
     route_data.reverse()
+    print('mapview updated')
 
     return go.Figure(
         data=route_data,

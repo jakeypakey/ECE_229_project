@@ -213,3 +213,14 @@ class AccidentDelay(object):
 #return ratings for each route
 #use getAll=True if you want ALL samples
 #print(a.orderRoutes(route,True))
+
+if __name__ == "__main__":
+    with open('../data/multi_route.json') as fi:
+        route = json.load(fi)
+
+    print(datetime.now())
+    a = AccidentDelay()
+    print(datetime.now())
+    print(a.orderRoutes(route))
+    print(datetime.now())
+

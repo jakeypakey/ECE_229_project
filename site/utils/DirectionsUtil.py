@@ -23,8 +23,9 @@ class DirectionsClient:
         assert isinstance(destination, str)
 
         directions_result = self.gmaps.directions(start, destination, alternatives=True)
+        res = {"routes": directions_result}
 
-        return directions_result
+        return res
 
     def get_geojson_from_route(self, route):
         ''' Given a single route object from google maps, convert the polyline retrieved to geojson format to map

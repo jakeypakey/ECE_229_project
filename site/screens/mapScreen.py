@@ -15,7 +15,7 @@ from utils.directionsClient import DirectionsClient
 from utils.accidentDelay import AccidentDelay
 
 # intialization
-directions_client = DirectionsClient()
+directions_client = DirectionsClient(config)
 mapbox_access_token = config['MAPBOX_KEY']
 latInitial = 32.880056457383546
 lonInitial =-117.23403033597369

@@ -5,6 +5,7 @@ See detail explaination and example:  https://www.notion.so/pytest-examples-4ed5
 '''
 import sys
 import os
+from dotenv import dotenv_values
 def PytestFileAdder(filename,exclude = ['__init__']):
     ''' 
     Avoiding import file error by adding files to sys search path for easier pytest
@@ -26,9 +27,10 @@ def PytestFileAdder(filename,exclude = ['__init__']):
                 package_name.append(f)
                 sys.path.insert(1, root)
     return package_name
-file = '/workspace/ECE_229_project/site/'
-PytestFileAdder(file)
-from DirectionsUtil import *
+file = '../site/'
+pt = PytestFileAdder(file)
+
+from directionsClient import *
 from plots import *
 import plotly.express as px
 import plotly
@@ -36,8 +38,9 @@ import plotly
 def test_plotSources():
     assert isinstance(plotSources(),plotly.graph_objs._figure.Figure)
 
-obj = DirectionsClient()
+config = dotenv_values('../site/.env')
+obj = DirectionsClient(config)
 def test_get_directions_json():
-    jason_ins = obj.get_directions_json('ucsd','LA')
-    assert all([isinstance(x,dict) for x in jason_ins])
+    json_directions= obj.get_directions_json('ucsd','LA')
+    assert 'routes' in json_directions
   

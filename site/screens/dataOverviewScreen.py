@@ -6,8 +6,7 @@ import plotly.graph_objects as go
 import plotly.express as px
 import pickle
 import pandas as pd
-from utils.dataOverviewUtil import preprocessFeatureData
-from .plots import *
+from utils.plots import *
 
 # load datasets
 sources = pickle.load(open('../data/sourceDist.pkl', 'rb'))

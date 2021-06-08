@@ -3,17 +3,33 @@ import numpy as np
 import pandas as pd
 import pickle
 
+def preprocessFeatureData(feat):
+    values,labels = [x[1] for x in feat],[x[0] for x in feat]
+    values/=sum(values)
+    other = 0
+    final = {'Feature': [],'Impact':[]}
+    for k,v in zip(labels,values):
+        if v < .02:
+            other+=v
+        else:
+            final['Feature'].append(k)
+            final['Impact'].append(v)
+    final['Feature'].append('Others')
+    final['Impact'].append(other)
+    return final
+
 def plotSources():
     with open('../data/sourceDist.pkl','rb') as fi:
         sources = pickle.load(fi)
     final = {'Source':list(sources.keys()),'Count':list(sources.values())}
     #return final
-    return px.pie(final,title='Data sources',names='Source',values='Count')
+    return px.pie(final,names='Source',values='Count')
+
 def plotQuantiles():
     with open('../data/quants.pkl','rb') as fi:
         quants = pd.Series(pickle.load(fi))
-        quants = quants.apply(lambda x: x/60)
-    return px.bar(quants,title='Distribution of accident Duration',labels={'index':'Quantile','value':'Duration of accident (hours)'})
+    return px.bar(quants,labels={'index':'Quantile','value':'Duration of accident (minutes)'})
+
 def plotImportance(vertical=False):
     with open('../data/featureImportance.pkl','rb') as fi:
         feat = pickle.load(fi)
@@ -30,10 +46,10 @@ def plotImportance(vertical=False):
     final['Feature'].append('Others')
     final['Impact as a Percentage'].append(100*other)
     if vertical:
-        figB = px.bar(final,title='Features impacting accident duration',y='Feature',x='Impact as a Percentage',orientation='h')
+        figB = px.bar(final,y='Feature',x='Impact as a Percentage',orientation='h')
         figB.update_xaxes(ticksuffix="%", showgrid=True)
     else:
-        figB = px.bar(final,title='Features impacting accident duration',x='Feature',y='Impact as a Percentage')
+        figB = px.bar(final,x='Feature',y='Impact as a Percentage')
     
         figB.update_yaxes(ticksuffix="%", showgrid=True)
     return figB

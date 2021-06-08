@@ -88,8 +88,6 @@ def update_graphs(states,normalization):
     if not states:
         states = ["All"]
         
-
-
     if 'All' in states:
         
         df = accidents

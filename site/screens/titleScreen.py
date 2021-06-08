@@ -8,10 +8,4 @@ layout = html.Div(id='title-screen', className='row center-title', children=
             html.H1('''US Traffic Accident Analysis'''),
             html.H3('''by Group 2''')
         ]),
-        # html.Div(className='nav-button-next', children=
-        #     [
-        #         html.A('Next', href='#data-overview-screen')
-        #     ]
-        # )
-
     ])

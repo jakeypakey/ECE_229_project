@@ -101,6 +101,14 @@ layout = html.Div(id='map-screen', className='row flex-display map-row', childre
     ]
 )
 def update_map(nclicks, start, end):
+    """ Updates the map when submit button is pressed and start and end fields are populated
+
+    :param nclicks: the number of times the submit button is clicked. this triggers the callback
+    :param start: the starting location
+    :parm end: the ending location
+    :return: a list of routes (tuples of long/lat) ranked by expected amount of accident delay
+    :type: string json object
+    """
     if nclicks == 0 or not start or not end:
         raise PreventUpdate
     routes = directions_client.get_directions_json(start, end)
@@ -120,6 +128,12 @@ def update_map(nclicks, start, end):
     ]
 )
 def update_graph(routes_json):
+    """ Plots the routes passed in by the route_json string
+    
+    :param routes_json: the routes passed in from the update_map()
+    :return: a Figure containing the routes drown on a Mapbox object
+    :rtype: Figure object
+    """
     route_colors = ['#f1a208', '#005377', '#052f5f']
     routes = json.loads(routes_json)
     route_geojson = [directions_client.get_geojson_from_route(r) for r in routes]

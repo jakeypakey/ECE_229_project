@@ -14,9 +14,6 @@ quants = pd.Series(pickle.load(open('../data/quants.pkl', 'rb')))
 feat = pickle.load(open('../data/featureImportance.pkl', 'rb'))
 final = preprocessFeatureData(feat)
 
-
-# process importance
-
 layout = html.Div(id='data-overview-screen', className='', children=
     [
         html.Div(className='row flex-display', children=

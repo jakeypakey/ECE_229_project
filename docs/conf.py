@@ -14,6 +14,7 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath('../'))
 sys.path.append(os.path.abspath('../site/'))
+sys.path.append(os.path.abspath('../Weather_Time_All_States/'))
 
 
 # -- Project information -----------------------------------------------------

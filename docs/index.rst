@@ -13,7 +13,8 @@ Welcome to ECE229_Project's documentation!
    :members:
 .. automodule:: utils.cleaning
    :members:
-
+.. automodule:: All_States_Plots
+   :members:
 
 
 Indices and tables

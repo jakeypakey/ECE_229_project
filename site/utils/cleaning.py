@@ -8,10 +8,10 @@ from shapely.geometry.polygon import Polygon
 #socal box
 #[[-118.4843415454,32.5589092648],[-115.62921702,32.5589092648],[-115.62921702,34.4611013421],[-118.4843415454,34.4611013421],[-118.4843415454,32.5589092648]]
 def getPandasNumeric(df,box=None):
-    """cleans raw data
-    :param df : DataFrame
-    :param  box: bounding box, if points are to be limited
-                 to a single area
+    """
+    cleans raw data for training
+    :param df: DataFrame
+    :param  box: bounding box, if points are to be limited to a single area
     :raises TypeError: non dataframe input
     :return: cleaned DataFrame
     :rtype: DataFrame

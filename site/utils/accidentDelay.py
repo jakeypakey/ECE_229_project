@@ -20,11 +20,12 @@ class AccidentDelay(object):
 
     def __init__(self,modelFile='../data/trainedModelNationwide.pkl',apiKeyFile='../data/key.pkl'):
         """
-        loads the api key and model into memory
-        :param routeJSON : raw json from googlemaps
-        :param model : sklearn model for inference
+        Loads the api key and model into memory
+
+        :param routeJSON: raw json from googlemaps
+        :param model: sklearn model for inference
         :raises TypeError: when non strings input
-                FileNotFoundError: when file does not exist
+        :raises FileNotFoundError: when file does not exist
         :return: None
         """
         if not isinstance(modelFile,str) or not isinstance(apiKeyFile,str):
@@ -38,13 +39,12 @@ class AccidentDelay(object):
 
     ##THIS IS THE ONLY FUNCTION THAT SHOULD NEEED TO BE CALLED ONCE OBJECT IS CONSTRUCTED
     def orderRoutes(self,routeJSON,getAll=False):
-        """rates the routes accident time score
-        :param routeJSON : raw json from googlemaps
-        :param getAll : true if all points and values desired
+        """
+        Rates the routes accident time score
+        :param routeJSON: raw json from googlemaps
+        :param getAll: true if all points and values desired
         :raises TypeError: when non dictionary input
-        :return: values pertaining to time rating
-                in the order that the routes were ordered
-                inside the routeJSON
+        :return: values pertaining to time rating in the order that the routes were ordered inside the routeJSON
         :rtype: list of floats, and values if desired
         """
         if not isinstance(routeJSON,dict):
@@ -58,10 +58,10 @@ class AccidentDelay(object):
     def getWeather(self,lat=32.8800806,lng=-117.237558):
         """fetches weather parameters for the provided latitude and longitude
         more info at https://openweathermap.org/current
-        :param lat : latitude, defaults to Geisel Library latitude 
-        :param lng : longitude, defaults to Geisel Library longitude 
+        :param lat: latitude, defaults to Geisel Library latitude 
+        :param lng: longitude, defaults to Geisel Library longitude 
         :raises ValueError: when invalid lat lng passed
-                TypeError: when non float input
+        :raises TypeError: when non float input
         :return: JSON with relevant weather data
         :rtype: JSON object
         """
@@ -79,11 +79,12 @@ class AccidentDelay(object):
         return r.json()
 
     def generateExample(self,lat=None,lng=None,weatherDict=None):
-        """Parse and transform weather dictionary from getWeather
+        """
+        Parse and transform weather dictionary from getWeather
         and use the information to create an example for inference
-        :param weatherDict : dictionary with raw json
+        :param weatherDict: dictionary with raw json
         :raises TypeError: when non dict passed to dict arg
-                ValueError: when lat,lng disagrees with dict
+        :raises ValueError: when lat,lng disagrees with dict
         :return: JSON with relevant weather data
         :rtype: JSON object
         """
@@ -158,14 +159,14 @@ class AccidentDelay(object):
         return 2*6367*np.arcsin(np.sqrt(np.sin(deltaLat/2)**2 + np.cos(lat1)*np.cos(lat2)*np.sin(deltaLng/2)**2))
 
     def rateRoute(self,routeDict,getAll=False):    
-        """provides a rating of the time of an accident given
+        """
+        provides a rating of the time of an accident given
         one occurs along the route on the route specified
-        :param routeDict : the route as a dict
-        :param model : sklearn model for inference
-        :param getAll : returns all sample points, along with normalized scores
+        :param routeDict: the route as a dict
+        :param model: sklearn model for inference
+        :param getAll: returns all sample points, along with normalized scores
         :raises TypeError: when non dictionary input
-        :return: value pertaining to time rating
-                 and all scored points if desired
+        :return: value pertaining to time rating and all scored points if desired
         :rtype: (scores,allPoints)
         """
         if not isinstance(routeDict,dict):

@@ -1,12 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Wed Jun  9 20:36:53 2021
-
-@author: srist
-"""
-
-
-
 
 import sys
 import os

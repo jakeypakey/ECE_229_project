@@ -15,6 +15,8 @@ Welcome to ECE229_Project's documentation!
    :members:
 .. automodule:: All_States_Plots
    :members:
+.. automodule:: utils.rawDataVisualizationUtil
+   :members:
 
 
 Indices and tables

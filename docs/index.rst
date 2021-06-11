@@ -17,6 +17,10 @@ Welcome to ECE229_Project's documentation!
    :members:
 .. automodule:: utils.rawDataVisualizationUtil
    :members:
+.. automodule:: utils.directionsClient
+   :members:
+.. automodule:: utils.plots
+   :members:
 
 
 Indices and tables

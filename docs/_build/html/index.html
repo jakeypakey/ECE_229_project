@@ -1,18 +1,17 @@
 
 <!DOCTYPE html>
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to ECE229_Project’s documentation! &#8212; ECE229_Project June 11, 2021 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
    
@@ -35,9 +34,9 @@
 <h1>Welcome to ECE229_Project’s documentation!<a class="headerlink" href="#welcome-to-ece229-project-s-documentation" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<dl class="py class">
+<dl class="class">
 <dt id="utils.accidentDelay.AccidentDelay">
-<em class="property">class </em><code class="sig-prename descclassname">utils.accidentDelay.</code><code class="sig-name descname">AccidentDelay</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">modelFile</span><span class="o">=</span><span class="default_value">'../data/trainedModelNationwide.pkl'</span></em>, <em class="sig-param"><span class="n">apiKeyFile</span><span class="o">=</span><span class="default_value">'../data/key.pkl'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#utils.accidentDelay.AccidentDelay" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">utils.accidentDelay.</code><code class="sig-name descname">AccidentDelay</code><span class="sig-paren">(</span><em class="sig-param">modelFile='../data/trainedModelNationwide.pkl'</em>, <em class="sig-param">apiKeyFile='../data/key.pkl'</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.accidentDelay.AccidentDelay" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class wraps a model which provides an esitmate of the time delay
 given an accident occured at a given location</p>
 <dl class="field-list simple">
@@ -48,9 +47,9 @@ given an accident occured at a given location</p>
 </ul>
 </dd>
 </dl>
-<dl class="py method">
+<dl class="method">
 <dt id="utils.accidentDelay.AccidentDelay.distance">
-<code class="sig-name descname">distance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">y</span></em><span class="sig-paren">)</span><a class="headerlink" href="#utils.accidentDelay.AccidentDelay.distance" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">distance</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.accidentDelay.AccidentDelay.distance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the distance between x,y in kilometers using the Haversine formula: <a class="reference external" href="https://en.wikipedia.org/wiki/Haversine_formula">https://en.wikipedia.org/wiki/Haversine_formula</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -71,9 +70,9 @@ given an accident occured at a given location</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="utils.accidentDelay.AccidentDelay.generateExample">
-<code class="sig-name descname">generateExample</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lat</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lng</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">weatherDict</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#utils.accidentDelay.AccidentDelay.generateExample" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">generateExample</code><span class="sig-paren">(</span><em class="sig-param">lat=None</em>, <em class="sig-param">lng=None</em>, <em class="sig-param">weatherDict=None</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.accidentDelay.AccidentDelay.generateExample" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse and transform weather dictionary from getWeather and use the information to create an example for inference</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -94,9 +93,9 @@ given an accident occured at a given location</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="utils.accidentDelay.AccidentDelay.getWeather">
-<code class="sig-name descname">getWeather</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lat</span><span class="o">=</span><span class="default_value">32.8800806</span></em>, <em class="sig-param"><span class="n">lng</span><span class="o">=</span><span class="default_value">- 117.237558</span></em><span class="sig-paren">)</span><a class="headerlink" href="#utils.accidentDelay.AccidentDelay.getWeather" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">getWeather</code><span class="sig-paren">(</span><em class="sig-param">lat=32.8800806</em>, <em class="sig-param">lng=-117.237558</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.accidentDelay.AccidentDelay.getWeather" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fetches weather parameters for the provided latitude and longitude more info at <a class="reference external" href="https://openweathermap.org/current">https://openweathermap.org/current</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -120,9 +119,9 @@ given an accident occured at a given location</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="utils.accidentDelay.AccidentDelay.orderRoutes">
-<code class="sig-name descname">orderRoutes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">routeJSON</span></em>, <em class="sig-param"><span class="n">getAll</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#utils.accidentDelay.AccidentDelay.orderRoutes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">orderRoutes</code><span class="sig-paren">(</span><em class="sig-param">routeJSON</em>, <em class="sig-param">getAll=False</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.accidentDelay.AccidentDelay.orderRoutes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Rates the routes accident time score</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -143,9 +142,9 @@ given an accident occured at a given location</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="utils.accidentDelay.AccidentDelay.rateRoute">
-<code class="sig-name descname">rateRoute</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">routeDict</span></em>, <em class="sig-param"><span class="n">getAll</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#utils.accidentDelay.AccidentDelay.rateRoute" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">rateRoute</code><span class="sig-paren">(</span><em class="sig-param">routeDict</em>, <em class="sig-param">getAll=False</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.accidentDelay.AccidentDelay.rateRoute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Provides a rating of the time of an accident given one occurs along the route on the route specified</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -169,20 +168,9 @@ given an accident occured at a given location</p>
 
 </dd></dl>
 
-<span class="target" id="module-utils.cleaning"></span><dl class="py function">
-<dt id="utils.cleaning.getPandasNumeric">
-<code class="sig-prename descclassname">utils.cleaning.</code><code class="sig-name descname">getPandasNumeric</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span></em>, <em class="sig-param"><span class="n">box</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#utils.cleaning.getPandasNumeric" title="Permalink to this definition">¶</a></dt>
-<dd><p>cleans raw data for training
-:param df: DataFrame
-:param  box: bounding box, if points are to be limited to a single area
-:raises TypeError: non dataframe input
-:return: cleaned DataFrame
-:rtype: DataFrame</p>
-</dd></dl>
-
-<span class="target" id="module-All_States_Plots"></span><dl class="py function">
+<span class="target" id="module-All_States_Plots"></span><dl class="function">
 <dt id="All_States_Plots.get_counties">
-<code class="sig-prename descclassname">All_States_Plots.</code><code class="sig-name descname">get_counties</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">starter_fip</span></em><span class="sig-paren">)</span><a class="headerlink" href="#All_States_Plots.get_counties" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">All_States_Plots.</code><code class="sig-name descname">get_counties</code><span class="sig-paren">(</span><em class="sig-param">starter_fip</em><span class="sig-paren">)</span><a class="headerlink" href="#All_States_Plots.get_counties" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the geojson dictionary necessary for DASH plot</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -191,9 +179,9 @@ given an accident occured at a given location</p>
 </dl>
 </dd></dl>
 
-<dl class="py function">
+<dl class="function">
 <dt id="All_States_Plots.plot_double_dropdown_chloropleth">
-<code class="sig-prename descclassname">All_States_Plots.</code><code class="sig-name descname">plot_double_dropdown_chloropleth</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">processed_data</span></em>, <em class="sig-param"><span class="n">fip_dict</span></em>, <em class="sig-param"><span class="n">fipkey_popvalue</span></em><span class="sig-paren">)</span><a class="headerlink" href="#All_States_Plots.plot_double_dropdown_chloropleth" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">All_States_Plots.</code><code class="sig-name descname">plot_double_dropdown_chloropleth</code><span class="sig-paren">(</span><em class="sig-param">processed_data</em>, <em class="sig-param">fip_dict</em>, <em class="sig-param">fipkey_popvalue</em><span class="sig-paren">)</span><a class="headerlink" href="#All_States_Plots.plot_double_dropdown_chloropleth" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dash interface - plots heatmap of california vehicle accidents given weather and time.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -206,9 +194,9 @@ given an accident occured at a given location</p>
 </dl>
 </dd></dl>
 
-<dl class="py function">
+<dl class="function">
 <dt id="All_States_Plots.population_norm">
-<code class="sig-prename descclassname">All_States_Plots.</code><code class="sig-name descname">population_norm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">histogram</span></em>, <em class="sig-param"><span class="n">fipkey_popvalue</span></em><span class="sig-paren">)</span><a class="headerlink" href="#All_States_Plots.population_norm" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">All_States_Plots.</code><code class="sig-name descname">population_norm</code><span class="sig-paren">(</span><em class="sig-param">histogram</em>, <em class="sig-param">fipkey_popvalue</em><span class="sig-paren">)</span><a class="headerlink" href="#All_States_Plots.population_norm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Normalize histogram by population per 1000 people</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -220,9 +208,9 @@ given an accident occured at a given location</p>
 </dl>
 </dd></dl>
 
-<dl class="py function">
+<dl class="function">
 <dt id="All_States_Plots.processing_data">
-<code class="sig-prename descclassname">All_States_Plots.</code><code class="sig-name descname">processing_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">processed_data</span></em>, <em class="sig-param"><span class="n">CA_fip_dict</span></em>, <em class="sig-param"><span class="n">fipkey_popvalue</span></em><span class="sig-paren">)</span><a class="headerlink" href="#All_States_Plots.processing_data" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">All_States_Plots.</code><code class="sig-name descname">processing_data</code><span class="sig-paren">(</span><em class="sig-param">processed_data</em>, <em class="sig-param">CA_fip_dict</em>, <em class="sig-param">fipkey_popvalue</em><span class="sig-paren">)</span><a class="headerlink" href="#All_States_Plots.processing_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts the csv file into dataframe of categories vs accidents.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -235,9 +223,9 @@ given an accident occured at a given location</p>
 </dl>
 </dd></dl>
 
-<span class="target" id="module-utils.rawDataVisualizationUtil"></span><dl class="py class">
+<span class="target" id="module-utils.rawDataVisualizationUtil"></span><dl class="class">
 <dt id="utils.rawDataVisualizationUtil.generateCleanedData">
-<em class="property">class </em><code class="sig-prename descclassname">utils.rawDataVisualizationUtil.</code><code class="sig-name descname">generateCleanedData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data_filename</span><span class="o">=</span><span class="default_value">'../data/US_Accidents_Dec20.csv'</span></em>, <em class="sig-param"><span class="n">population_filename</span><span class="o">=</span><span class="default_value">'../data/population.xlsx'</span></em>, <em class="sig-param"><span class="n">statenames_filename</span><span class="o">=</span><span class="default_value">'../data/state_name_code_mappings.csv'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#utils.rawDataVisualizationUtil.generateCleanedData" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">utils.rawDataVisualizationUtil.</code><code class="sig-name descname">generateCleanedData</code><span class="sig-paren">(</span><em class="sig-param">data_filename='../data/US_Accidents_Dec20.csv'</em>, <em class="sig-param">population_filename='../data/population.xlsx'</em>, <em class="sig-param">statenames_filename='../data/state_name_code_mappings.csv'</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.rawDataVisualizationUtil.generateCleanedData" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class cleans and organises the original data for the ease of 
 fast retrival while fetching values in real time during the usage of Dashboard 
 for visualization of accident data in each location and for comparison bar plots.</p>
@@ -250,7 +238,7 @@ for visualization of accident data in each location and for comparison bar plots
 </ul>
 </dd>
 </dl>
-<dl class="py method">
+<dl class="method">
 <dt id="utils.rawDataVisualizationUtil.generateCleanedData.convert2levels">
 <code class="sig-name descname">convert2levels</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utils.rawDataVisualizationUtil.generateCleanedData.convert2levels" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function converts specific features with continuous values to discrete level.
@@ -263,7 +251,7 @@ TimeOfDay is quantized to 3 discrete levels (Day: 6:00-11:59,Noon: 12:00-17:59,N
 </dl>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="utils.rawDataVisualizationUtil.generateCleanedData.fillnabyDataImputation">
 <code class="sig-name descname">fillnabyDataImputation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utils.rawDataVisualizationUtil.generateCleanedData.fillnabyDataImputation" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function uses Imputation function from sklearn to fill in the Nan values in the data.</p>
@@ -274,9 +262,9 @@ TimeOfDay is quantized to 3 discrete levels (Day: 6:00-11:59,Noon: 12:00-17:59,N
 </dl>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="utils.rawDataVisualizationUtil.generateCleanedData.get_processedAccidentLocationFile">
-<code class="sig-name descname">get_processedAccidentLocationFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">output_filename</span><span class="o">=</span><span class="default_value">'../data/accidents_visualization.csv'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#utils.rawDataVisualizationUtil.generateCleanedData.get_processedAccidentLocationFile" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_processedAccidentLocationFile</code><span class="sig-paren">(</span><em class="sig-param">output_filename='../data/accidents_visualization.csv'</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.rawDataVisualizationUtil.generateCleanedData.get_processedAccidentLocationFile" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function takes the original data and counts the number of accidents that occured 
 in each state during each month. 
 Also it takes the population information and computed the number of accidents occured per million people.</p>
@@ -290,9 +278,9 @@ Also it takes the population information and computed the number of accidents oc
 </dl>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="utils.rawDataVisualizationUtil.generateCleanedData.get_processedComparisonFile">
-<code class="sig-name descname">get_processedComparisonFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">output_filename</span><span class="o">=</span><span class="default_value">'../data/comparisons.csv'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#utils.rawDataVisualizationUtil.generateCleanedData.get_processedComparisonFile" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_processedComparisonFile</code><span class="sig-paren">(</span><em class="sig-param">output_filename='../data/comparisons.csv'</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.rawDataVisualizationUtil.generateCleanedData.get_processedComparisonFile" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function takes the original data and counts the number of accidents that occured 
 in each state during each month when a particular feature takes a specific value. 
 For example: Number of accidents occured in CA in 2017-01 when DayOfWeek is Monday.</p>
@@ -306,6 +294,114 @@ For example: Number of accidents occured in CA in 2017-01 when DayOfWeek is Mond
 </dl>
 </dd></dl>
 
+</dd></dl>
+
+<span class="target" id="module-utils.directionsClient"></span><dl class="class">
+<dt id="utils.directionsClient.DirectionsClient">
+<em class="property">class </em><code class="sig-prename descclassname">utils.directionsClient.</code><code class="sig-name descname">DirectionsClient</code><span class="sig-paren">(</span><em class="sig-param">env_vars</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.directionsClient.DirectionsClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class is a decorator class to the Google Maps Directions API.</p>
+<dl class="method">
+<dt id="utils.directionsClient.DirectionsClient.get_directions_json">
+<code class="sig-name descname">get_directions_json</code><span class="sig-paren">(</span><em class="sig-param">start</em>, <em class="sig-param">destination</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.directionsClient.DirectionsClient.get_directions_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes a request to Google’s Directions API to get the routes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>start</strong> – the starting location in string format</p>
+</dd>
+<dt class="field-even">Destination</dt>
+<dd class="field-even"><p>the destination location in string format</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>AssertionError</strong> – the start or destination is not in string format</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>dictionary that contains a list of routes returned by the google maps api</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dictionary with one key for ‘routes’</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="utils.directionsClient.DirectionsClient.get_geojson_from_route">
+<code class="sig-name descname">get_geojson_from_route</code><span class="sig-paren">(</span><em class="sig-param">route</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.directionsClient.DirectionsClient.get_geojson_from_route" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a single route object from google maps, convert the polyline retrieved to geojson format to map</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>route</strong> – a route returned from Google Directions API</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the polyline containing the longitude and latitudes</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list of tuples</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-utils.plots"></span><dl class="function">
+<dt id="utils.plots.plotImportance">
+<code class="sig-prename descclassname">utils.plots.</code><code class="sig-name descname">plotImportance</code><span class="sig-paren">(</span><em class="sig-param">vertical=False</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.plots.plotImportance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the ranked importance of features from a stored pickle file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>vertical</strong> – plot the image vertically or horizontally</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>plotly bar chart</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>px.bar</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.plots.plotQuantiles">
+<code class="sig-prename descclassname">utils.plots.</code><code class="sig-name descname">plotQuantiles</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utils.plots.plotQuantiles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the quantiles for duration of accident from a saved pickle file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a plotly bar chart showing duration</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>px.bar</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.plots.plotSources">
+<code class="sig-prename descclassname">utils.plots.</code><code class="sig-name descname">plotSources</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utils.plots.plotSources" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the source pie chart from a saved pickle file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a plotly pie chart</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>px.pie</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.plots.preprocessFeatureData">
+<code class="sig-prename descclassname">utils.plots.</code><code class="sig-name descname">preprocessFeatureData</code><span class="sig-paren">(</span><em class="sig-param">feat</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.plots.preprocessFeatureData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Preprocesses the feature in order to prepare for plotly figure</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>feat</strong> – the feature datafrma</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>dictionary of features and impact</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -352,7 +448,7 @@ For example: Number of accidents occured in CA in 2017-01 when DayOfWeek is Mond
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script type="text/javascript">$('#searchbox').show(0);</script>
 
 
 
@@ -369,7 +465,7 @@ For example: Number of accidents occured in CA in 2017-01 when DayOfWeek is Mond
       &copy;2021, Aaron Luo, Dyuthi Sristi, Gates Zheng, Jacob Pollard, Steven Wong, Yejun Li.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.2</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

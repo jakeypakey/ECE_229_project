@@ -41,6 +41,7 @@ class AccidentDelay(object):
     def orderRoutes(self,routeJSON,getAll=False):
         """
         Rates the routes accident time score
+
         :param routeJSON: raw json from googlemaps
         :param getAll: true if all points and values desired
         :raises TypeError: when non dictionary input
@@ -56,8 +57,9 @@ class AccidentDelay(object):
         
 
     def getWeather(self,lat=32.8800806,lng=-117.237558):
-        """fetches weather parameters for the provided latitude and longitude
-        more info at https://openweathermap.org/current
+        """
+        Fetches weather parameters for the provided latitude and longitude more info at https://openweathermap.org/current
+
         :param lat: latitude, defaults to Geisel Library latitude 
         :param lng: longitude, defaults to Geisel Library longitude 
         :raises ValueError: when invalid lat lng passed
@@ -80,8 +82,8 @@ class AccidentDelay(object):
 
     def generateExample(self,lat=None,lng=None,weatherDict=None):
         """
-        Parse and transform weather dictionary from getWeather
-        and use the information to create an example for inference
+        Parse and transform weather dictionary from getWeather and use the information to create an example for inference
+
         :param weatherDict: dictionary with raw json
         :raises TypeError: when non dict passed to dict arg
         :raises ValueError: when lat,lng disagrees with dict
@@ -138,11 +140,11 @@ class AccidentDelay(object):
         return pd.Series(ret,index=idx)
 
     def distance(self,x,y):
-        """calculates the distance between x,y in kilometers
-        using the Haversine formula:
-        https://en.wikipedia.org/wiki/Haversine_formula
-        :param x : lat,lng in degrees
-        :param y : lat,lng in degrees
+        """
+        Calculates the distance between x,y in kilometers using the Haversine formula: https://en.wikipedia.org/wiki/Haversine_formula
+
+        :param x: lat,lng in degrees
+        :param y: lat,lng in degrees
         :raises TypeError: points not input
         :return: distnace in kilometers
         :rtype: float
@@ -160,8 +162,8 @@ class AccidentDelay(object):
 
     def rateRoute(self,routeDict,getAll=False):    
         """
-        provides a rating of the time of an accident given
-        one occurs along the route on the route specified
+        Provides a rating of the time of an accident given one occurs along the route on the route specified
+
         :param routeDict: the route as a dict
         :param model: sklearn model for inference
         :param getAll: returns all sample points, along with normalized scores
